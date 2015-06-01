@@ -62,6 +62,9 @@ if (Meteor.isClient) {
   Template.detailsProject.helpers({
     'yo' : function(){
       debugger;
+    },
+    'orders' : function(){
+      return this.orders();
     }
   });
 
@@ -84,6 +87,7 @@ if (Meteor.isServer) {
     // code to run on server at startup
   });
 }
+
 
 
 

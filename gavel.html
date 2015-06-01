@@ -31,7 +31,22 @@
 
 <template name="detailsProject">
   {{>nav}} 
-  {{title}}
+  <table class='hoverable'>
+          <thead>
+            <tr>
+                <th data-field="title">Tap to open order</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{ #each orders}}
+            
+              <tr>
+                <td><a href="{{link}}">{{_id}}</a></td>
+              </tr>
+            
+            {{ /each }}
+          </tbody>
+  </table>
 </template>
 
 <template name="hello">

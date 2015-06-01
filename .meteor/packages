@@ -12,3 +12,13 @@ jquery
 iron:router
 aldeed:autoform
 aldeed:simple-schema
+matb33:collection-hooks
+vsivsi:job-collection
+meteorhacks:npm
+aldeed:collection2
+
+npm-container
+wylio:mandrill
+wylio:winston-papertrail
+dburles:collection-helpers
+
