@@ -28,12 +28,14 @@ if (Meteor.isClient) {
 
   Template.addProject.events({
     'submit form': function( event ){
+      debugger;
       event.preventDefault();
       Projects.insert({
         'title' : event.target.children[0].children[0].children[1].value,
         'ctype' : event.target.children[0].children[1].children[0].children[3].value,
         'cnum' : event.target.children[0].children[2].children[1].value,
-        'cyear' : event.target.children[0].children[3].children[0].children[3].value
+        'cyear' : event.target.children[0].children[3].children[0].children[3].value,
+        'userId' : Meteor.userId()
       });
       Router.go('projects');
     }
@@ -87,6 +89,8 @@ if (Meteor.isServer) {
     // code to run on server at startup
   });
 }
+
+
 
 
 

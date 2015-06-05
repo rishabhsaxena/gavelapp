@@ -5,7 +5,6 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
 insecure
 materialize:materialize
 jquery
@@ -22,3 +21,7 @@ wylio:mandrill
 wylio:winston-papertrail
 dburles:collection-helpers
 
+accounts-password
+accounts-google
+accounts-facebook
+useraccounts:materialize
