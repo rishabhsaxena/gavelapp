@@ -82,6 +82,12 @@ if (Meteor.isClient) {
       
   }
 
+  Template.nav.events({
+    'click .logout' : function(){
+      AccountsTemplates.logout();
+      Router.go('/login');
+    }
+  }) 
 }
 
 if (Meteor.isServer) {
@@ -89,6 +95,18 @@ if (Meteor.isServer) {
     // code to run on server at startup
   });
 }
+
+// Router.onRun(function() {
+//   if (!Meteor.user() && this.ready()){
+//     debugger;
+//     return this.redirect('/login');
+
+//   }
+//   else{
+//     debugger;
+//     this.next();
+//   }
+// }, {except: ['login']}); 
 
 
 
