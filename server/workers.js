@@ -1,6 +1,6 @@
 // Job processing functions are written in the format job, cb
 var addEmailProcessor = function(job, cb) {
-    console.log("addEmailProcessor:", "Processing email tasks", job.data.to);
+    log.info("addEmailProcessor:", "Processing email tasks", job.data.to);
     debugger;
     // var tos = _.map(job.data.to, function(email){
     //     if(typeof email == 'string')
@@ -52,12 +52,12 @@ var addEmailProcessor = function(job, cb) {
     });
 
     if (status && status.statusCode == 200) {
-        console.log("Sent email successfully");
+        log.info("Sent email successfully");
         job.log("Sent successfully");
         job.done();
     }
     else {
-        //log.error("Sending email failed");
+        log.error("Sending email failed");
         job.log("Sending email failed", {
             level: 'warning'
         });
@@ -69,7 +69,7 @@ var addEmailProcessor = function(job, cb) {
 
 var addScraperProcessor = function(job, cb) {
     // Give the poor little project his helpers back
-    console.log("Scraping orders");
+    log.info("Scraping orders");
     var project = Projects.findOne(job.data.project._id);
     var emailLawyers = function() {
         //var lawyers = project.lawyers(); Notify the lawyers
@@ -84,20 +84,20 @@ var addScraperProcessor = function(job, cb) {
             // console.log("orders:", project.orders, links);
             // // Insert links in database here and then notify lawyers via email
             debugger;
-            //console.log(project.userEmail(),"user email");
+            log.error(project.userEmail(),"user email");
             if(links.length)
                 addEmailReminder(project, 'gavelorders', 'New orders have been fetched for your project:', project.userEmail(), 'rishabh@cloudvakil.com', 'orders fetched', new Date())
         }
 
         // Mark job as done and trigger callback
-        console.log("Done scraping email");
+        log.info("Done scraping email");
         job.log("Scraped email");
         job.done();
         cb();
     }
 
     if(project.ctype && project.cnum && project.cyear){
-        console.log(project.ctype ,project.cnum , project.cyear)
+        log.info(project.ctype ,project.cnum , project.cyear)
         scrapeDelhiHighCourt(project, emailLawyers);
     }
     else{

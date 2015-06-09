@@ -12,7 +12,6 @@ iron:router
 aldeed:autoform
 aldeed:simple-schema
 matb33:collection-hooks
-vsivsi:job-collection
 meteorhacks:npm
 aldeed:collection2
 
@@ -25,3 +24,5 @@ accounts-password
 accounts-google
 accounts-facebook
 useraccounts:materialize
+houston:admin
+vsivsi:job-collection

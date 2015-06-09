@@ -32,3 +32,6 @@ App.launchScreens({
   'android_xhdpi_portrait': 'resources/splash/gavel.tif'//,
   //'android_xhdpi_landscape': 'resources/splash/splash.png'
 });
+
+App.accessRule('http://*');
+App.accessRule('https://*');
