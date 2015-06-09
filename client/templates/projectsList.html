@@ -1,0 +1,20 @@
+<template name="projectsList">
+  <table class='hoverable'>
+          <thead>
+            <tr>
+                <th data-field="suitNumber">Suit Number</th>
+                <th data-field="title">Title</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{ #each projects}}
+            
+              <tr class="projectRow">
+                <td>{{ctype}}/{{cnum}}/{{cyear}}</td>
+                <td>{{title}}</td>
+              </tr>
+            
+            {{ /each }}
+          </tbody>
+  </table>
+</template>
