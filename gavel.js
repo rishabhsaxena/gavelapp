@@ -16,9 +16,9 @@ if (Meteor.isClient) {
       debugger;
       event.preventDefault();
       Projects.insert({
-        'title' : event.target.children[0].children[0].children[1].value,
+        'title' : event.target.children[0].children[0].children[0].value,
         'ctype' : event.target.children[0].children[1].children[0].children[3].value,
-        'cnum' : event.target.children[0].children[2].children[1].value,
+        'cnum' : event.target.children[0].children[2].children[0].value,
         'cyear' : event.target.children[0].children[3].children[0].children[3].value,
         'userId' : Meteor.userId()
       });
