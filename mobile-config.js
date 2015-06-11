@@ -6,10 +6,10 @@ App.icons({
   // 'ipad_2x': 'resources/icons/icon-72x72@2x.png',
 
   // Android
-  'android_ldpi': 'resources/icons/icon.jpg',
-  'android_mdpi': 'resources/icons/icon.jpg',
-  'android_hdpi': 'resources/icons/icon.jpg',
-  'android_xhdpi': 'resources/icons/icon.jpg'
+  'android_ldpi': 'resources/icons/gavel.png',
+  'android_mdpi': 'resources/icons/gavel.png',
+  'android_hdpi': 'resources/icons/gavel1.png',
+  'android_xhdpi': 'resources/icons/gavel.png'
 });
 
 App.launchScreens({
@@ -27,9 +27,9 @@ App.launchScreens({
   // 'android_ldpi_landscape': 'resources/splash/splash.png',
   // 'android_mdpi_portrait': 'resources/splash/splash.png',
   // 'android_mdpi_landscape': 'resources/splash/splash.png',
-   'android_hdpi_portrait': 'resources/splash/gavel.tif',
+  'android_hdpi_portrait': 'resources/splash/splash_screen.png',
   // 'android_hdpi_landscape': 'resources/splash/splash.png',
-  'android_xhdpi_portrait': 'resources/splash/gavel.tif'//,
+  'android_xhdpi_portrait': 'resources/splash/splash_screen.png'//,
   //'android_xhdpi_landscape': 'resources/splash/splash.png'
 });
 

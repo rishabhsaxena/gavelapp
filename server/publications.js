@@ -4,5 +4,5 @@
   });
 
   Meteor.publish("orders",function() {
-  	return Orders.find();
+  	return Orders.find({'userId' : this.userId});
   });

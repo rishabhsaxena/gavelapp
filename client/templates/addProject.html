@@ -1,11 +1,12 @@
 <template name="addProject">
+      {{>nav}}     
   <!-- Dont touch this form markup linked to js -->
 	<div class="row">
 	    <form class="col s12 addProjectForm">
         <!-- Dont touch this form markup linked to js -->
 	      <div class="row">
 	        <div class="input-field col s12 ">
-	          <i class="mdi-action-account-circle prefix"></i>
+	          <!-- <i class="mdi-action-account-circle prefix"></i> -->
 	          <input id="icon_prefix" type="text" name="case_title" class="validate">
 	          <label for="icon_prefix">Case Title</label>
 	        </div>
@@ -128,7 +129,7 @@
             <label>Case Type</label>
           </div>
 	        <div class="input-field col s12 ">
-	          <i class="mdi-communication-phone prefix"></i>
+	          <!-- <i class="mdi-communication-phone prefix"></i> -->
 	          <input id="icon_telephone" type="number" name="case_number" class="validate">
 	          <label for="icon_telephone">Case Number </label>
 	        </div>

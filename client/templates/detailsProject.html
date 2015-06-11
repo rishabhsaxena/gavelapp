@@ -2,16 +2,23 @@
   {{>nav}} 
   <table class='hoverable'>
           <thead>
+            {{#if orderFetched}}
             <tr>
                 <th data-field="title">Tap to open order</th>
             </tr>
+            {{/if}}
           </thead>
           <tbody>
-            {{ #each orders}}
-              <tr>
-                <a href="#" onclick="window.open('{{link}}', '_system');">{{link}}</a>
-              </tr>
-            {{ /each }}
+            {{#if orderFetched}}
+              {{ #each orders}}
+                <tr>
+                  <a href="#" onclick="window.open('{{link}}', '_system');">{{link}}</a>
+                </tr>
+              {{ /each }}
+            {{else}}
+              Orders Not Found
+            {{/if}}
+            
           </tbody>
   </table>
 </template>
