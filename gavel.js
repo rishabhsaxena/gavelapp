@@ -52,6 +52,13 @@ if (Meteor.isClient) {
     },
     'orders' : function(){
       return this.orders();
+    },
+    'orderFetched' : function(){
+      if (this.orders().length > 0){
+        return true;
+      }else{
+        return false;
+      }
     }
   });
 
