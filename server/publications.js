@@ -4,5 +4,6 @@
   });
 
   Meteor.publish("orders",function() {
+  	debugger;
   	return Orders.find();
   });
