@@ -1,10 +1,12 @@
 <template name="nav">
-	<nav>
+	<nav class="blue accent-4">
     <!-- Dropdown Trigger -->
-    <span class='dropdown-button right' href='#' data-activates='dropdown1' ><i class="mdi-navigation-more-vert"></i></span>
+		<a href="/projects"><img src="/resources/images/gavel1.png" alt="gavel" height="60" width="100" style="padding-top: 5px; padding-left: 20px; padding-bottom: 5px;"/></a>
+    <span class='dropdown-button right' href='#' data-activates='dropdown1' data-belowOrigin="true"><i class="mdi-navigation-more-vert" style="padding-right:20px;"></i></span>
     <!-- Dropdown Structure -->
     <ul id='dropdown1' class='dropdown-content'>
       <li><a class="tour">Tour</a></li>
+			<li class="divider"></li>
       <li><a class="logout">Logout</a></li>
     </ul>
 	  <!-- <ul class="right hide-on-med-and-down">
