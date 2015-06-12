@@ -5,13 +5,13 @@
   background-color:transparent;
   /*-moz-border-radius:10px;
   -webkit-border-radius:10px;*/
-  border-radius:30px;
-  border:10px solid #ffffff;
+  border-radius:10px;
+  border:2px solid #ffffff;
   display:inline-block;
   cursor:pointer;
   color:#ffffff;
   font-family:Roboto;
-  font-size:60px;
+  font-size:30px;
   padding:12px 60px;
   text-decoration:none;
   /*text-shadow:0px 1px 0px #ffffff;*/
@@ -23,4 +23,68 @@
 .myButton:active {
   position:relative;
   top:1px;
+}
+.projectlist{
+  padding-top : 10px;
+}
+.head{
+  font-weight: bold;
+  font-size: 20px;
+}
+.projectRow{
+  font-size: 16px;
+}
+@import url(http://fonts.googleapis.com/css?family=Montserrat:700);
+.lw {
+  font-size: 25px;
+  text-align:  center;
+  color:  #fff;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-family: 'Montserrat', Roboto;
+}
+.image{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.plate{
+  /*background-color: #2962ff;*/
+  font-family:  Roboto;
+}
+.at-form{
+  padding: 10px 20px;
+}
+.at-signup{
+  color: #2962ff;
+}
+.at-signup:hover{
+  color: #3a7abd;
+}
+#at-facebook, #at-google{
+  margin-bottom: 15px;
+}
+#at-btn{
+  margin-top: 20px;
+}
+#at-field-password, #at-field-email, #at-field-password_again{
+  text-align: center;
+  font-size: 15px;
+  color: #727272;
+  height: 30px;
+}
+.at-signup-link, .at-signin-link {
+  color: #545454;
+  font-size: 15px;
+  text-align: center;
+}
+#at-signUp, #at-signIn{
+  font-size:  15px;
+  text-transform: uppercase;
+}
+.at-sep{
+  font-size: 15px;
+  padding-bottom: 10px;
+}
+.submit_button{
+  text-align: center;
 }
