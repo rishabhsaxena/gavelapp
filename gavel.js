@@ -75,7 +75,8 @@ if (Meteor.isClient) {
   }
 
   Template.nav.events({
-    'click .logout' : function(){
+    'click .logout' : function(e){
+      e.preventDefault();
       AccountsTemplates.logout();
     },
     'click .tour' : function(){
