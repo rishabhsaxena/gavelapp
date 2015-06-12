@@ -1,22 +1,16 @@
 @import url(http://fonts.googleapis.com/css?family=Montserrat:700);
 
 .myButton {
-  /*-moz-box-shadow: 0px 0px 0px 2px #ffffff;
-  -webkit-box-shadow: 0px 0px 0px 2px #ffffff;
-  box-shadow: 0px 0px 0px 2px #ffffff;*/
   background-color:transparent;
-  /*-moz-border-radius:10px;
-  -webkit-border-radius:10px;*/
   border-radius:10px;
   border:2px solid #ffffff;
   display:inline-block;
   cursor:pointer;
   color:#ffffff;
   font-family:Roboto;
-  font-size:20px;
-  padding:8px 40px;
+  font-size:18px;
+  padding: 5px 40px;
   text-decoration:none;
-  /*text-shadow:0px 1px 0px #ffffff;*/
   font-weight: bold;
 }
 /*.myButton:hover {
