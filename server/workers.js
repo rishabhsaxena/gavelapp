@@ -71,11 +71,12 @@ var addScraperProcessor = function(job, cb) {
     // Give the poor little project his helpers back
     log.info("Scraping orders");
     var project = Projects.findOne(job.data.project._id);
-    var emailLawyers = function() {
+    var emailLawyers = Meteor.bindEnvironment(function(links) {
         //var lawyers = project.lawyers(); Notify the lawyers
 
         // if new links, notify lawyers or whatever group there is that new orders have been fetched
         if(checkNewLinks(project, links)){
+            log.info("Inserting orders")
             project.insertOrders(links);
             project = Projects.findOne(project._id);
             project.orders = project.orders();
@@ -83,7 +84,6 @@ var addScraperProcessor = function(job, cb) {
             // var subject = sprintf('[%s] New orders fetched for matter: %s', project._id, project.name)
             // console.log("orders:", project.orders, links);
             // // Insert links in database here and then notify lawyers via email
-            debugger;
             log.error(project.userEmail(),"user email");
             if(links.length)
                 addEmailReminder(project, 'gavelorders', 'New orders have been fetched for your project:', project.userEmail(), 'rishabh@cloudvakil.com', 'orders fetched:'+project.title, new Date())
@@ -94,14 +94,14 @@ var addScraperProcessor = function(job, cb) {
         job.log("Scraped email");
         job.done();
         cb();
-    }
+    });
 
-    if(project.ctype && project.cnum && project.cyear){
-        log.info(project.ctype ,project.cnum , project.cyear)
+    if(project.ctype && project.cno && project.cyear){
+        log.info(project.ctype ,project.cno , project.cyear)
         scrapeDelhiHighCourt(project, emailLawyers);
     }
     else{
-        var error = "Missing ctype, cnum or cyear for project " + project._id;
+        var error = "Missing ctype, cno or cyear for project " + project._id;
         job.log(error, {level: 'warning'});
         log.error(error);
         job.fail(error);

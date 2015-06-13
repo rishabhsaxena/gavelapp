@@ -70,7 +70,7 @@
       }
     },
     "phantomjs": {
-      "version": "1.9.16",
+      "version": "1.9.15",
       "dependencies": {
         "adm-zip": {
           "version": "0.4.4"
@@ -79,13 +79,13 @@
           "version": "0.16.5",
           "dependencies": {
             "graceful-fs": {
-              "version": "3.0.7"
+              "version": "3.0.8"
             },
             "jsonfile": {
               "version": "2.0.1"
             },
             "rimraf": {
-              "version": "2.3.4",
+              "version": "2.4.0",
               "dependencies": {
                 "glob": {
                   "version": "4.5.3",
@@ -135,10 +135,10 @@
           "version": "0.4.0"
         },
         "npmconf": {
-          "version": "2.1.1",
+          "version": "2.0.9",
           "dependencies": {
             "config-chain": {
-              "version": "1.1.8",
+              "version": "1.1.9",
               "dependencies": {
                 "proto-list": {
                   "version": "1.2.4"
@@ -149,7 +149,7 @@
               "version": "2.0.1"
             },
             "ini": {
-              "version": "1.3.3"
+              "version": "1.3.4"
             },
             "mkdirp": {
               "version": "0.5.1",
@@ -163,7 +163,7 @@
               "version": "3.0.2",
               "dependencies": {
                 "abbrev": {
-                  "version": "1.0.6"
+                  "version": "1.0.7"
                 }
               }
             },
@@ -176,10 +176,15 @@
               }
             },
             "osenv": {
-              "version": "0.1.1"
+              "version": "0.1.2",
+              "dependencies": {
+                "os-tmpdir": {
+                  "version": "1.0.1"
+                }
+              }
             },
             "semver": {
-              "version": "4.3.4"
+              "version": "4.3.6"
             },
             "uid-number": {
               "version": "0.0.5"
@@ -236,7 +241,7 @@
               "version": "0.4.0"
             },
             "tough-cookie": {
-              "version": "1.2.0"
+              "version": "2.0.0"
             },
             "form-data": {
               "version": "0.1.4",
