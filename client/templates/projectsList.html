@@ -1,10 +1,10 @@
 <template name="projectsList">
   <div class="projectlist">
     <div class="row center head">
-      <div class="col s12 m6" data-field="suitNumber">
+      <div class="col s6" data-field="suitNumber">
         Suit Number
       </div>
-      <div class="col s12 m6" data-field="title">
+      <div class="col s6" data-field="title">
         Title
       </div>
     </div>
@@ -12,10 +12,10 @@
       {{#each projects}}
       <a href='/projects/{{_id}}'>
         <div class="row center">
-          <div class="col s12 m6">
+          <div class="col s6">
             {{ctype}}/{{cnum}}/{{cyear}}
           </div>
-          <div class="col s12 m6">
+          <div class="col s6">
             {{title}}
           </div>
         </div>
