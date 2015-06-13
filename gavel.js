@@ -28,7 +28,6 @@ if (Meteor.isClient) {
 
   Template.projectsList.helpers({
     'projects' : function(){
-      debugger;
       return Projects.find();
     }
   });
