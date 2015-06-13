@@ -8,9 +8,13 @@
         Title
       </div>
     </div>
-    <div class="projectRow">
+    
       {{#each projects}}
+
       <a href='/projects/{{_id}}'>
+
+      <div class="projectRow">
+
         <div class="row center">
           <div class="col s12 m6">
             {{ctype}}/{{cnum}}/{{cyear}}
@@ -19,8 +23,12 @@
             {{title}}
           </div>
         </div>
+
       </a>
+
+      </div>
+
       {{/each}}
-    </div>
+    
   </div>
 </template>

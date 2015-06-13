@@ -6,10 +6,10 @@ App.icons({
   // 'ipad_2x': 'resources/icons/icon-72x72@2x.png',
 
   // Android
-  'android_ldpi': 'resources/icons/gavel.png',
-  'android_mdpi': 'resources/icons/gavel.png',
-  'android_hdpi': 'resources/icons/gavel1.png',
-  'android_xhdpi': 'resources/icons/gavel.png'
+  // 'android_ldpi': 'resources/icons/gavel.png',
+  // 'android_mdpi': 'resources/icons/gavel.png',
+   'android_hdpi': 'resources/icons/gavel1.png',
+   'android_xhdpi': 'resources/icons/gavel1.png'
 });
 
 App.launchScreens({
