@@ -13,6 +13,7 @@
               {{ #each orders}}
                 <tr>
                   <a href="#" onclick="window.open('https://docs.google.com/viewer?url={{link}}', '_system');">https://docs.google.com/viewer?url={{link}}</a>
+                  {{timeAgo}}
                 </tr>
               {{ /each }}
             {{else}}
