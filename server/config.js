@@ -1,6 +1,4 @@
 Meteor.startup(function() {
-	moment();
-
 	// Mandrill config
     Meteor.Mandrill.config({
         username: "thegreatshasha@gmail.com",
