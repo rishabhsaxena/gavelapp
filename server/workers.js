@@ -86,7 +86,7 @@ var addScraperProcessor = function(job, cb) {
             // // Insert links in database here and then notify lawyers via email
             log.error(project.userEmail(),"user email");
             if(links.length)
-                addEmailReminder(project, 'gavelorders', 'New orders have been fetched for your project:', project.userEmail(), 'rishabh@cloudvakil.com', 'orders fetched:'+project.title, new Date())
+                addEmailReminder(project, 'gavelorders', 'New orders have been fetched for your project:'+project.title, project.userEmail(), 'rishabh@cloudvakil.com', 'orders fetched:'+project.title, new Date())
         }
 
         // Mark job as done and trigger callback
