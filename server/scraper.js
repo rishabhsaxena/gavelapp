@@ -9,8 +9,8 @@ addScraperJob = function(project) {
 	// Create a new scraper job
 	var job = myJobs.createJob('addScraper', {'project': project});
 	job.repeat({
-	  repeats: Job.forever   // Rerun this job 5 times,
-	  //wait: 4*60*60*1000   // wait 50 seconds between each re-run.
+	  repeats: Job.forever,   // Rerun this job 5 times,
+	  wait: 4*60*60*1000   // wait 50 seconds between each re-run.
 	});
 	// job.repeat({
 	//   schedule: myJobs.later.parse.text('every 5 hours')   // Rerun this job every 5 minutes
@@ -44,16 +44,57 @@ checkNewLinks = function(project, links) {
 	return !(_.isEqual(projectLinksArray.sort(), linkArray.sort()));
 }
 
-scrapeDelhiHighCourt = function(project, callback) {
-	log.info("scrapeDelhiHighCourt:", "running scraper");
+scrapeDelhiHighCourt = function(project, cb) {
+	log.info("scrapeDelhiHighCourt:", "running scraper", "callback:");
 	var nm = new Nightmare();
+	var data = {
+		orders: [],
+		pdfs: []
+	};
+	var links = [];
 	
-	var handleResult = Meteor.bindEnvironment(function(p){
-		links = p;
-		log.info(links);
-		if(callback && links.length)
-			callback.call(this);
-	})
+	var handleResult = function(p){
+		console.log("setting equal to", p);
+		data.orders = p;
+	};
+
+	var fetchPdfs = function() {
+		console.log("inside getPdfs", data.orders);
+
+		var getIframePdf = function() {
+		    return document.querySelector('iframe').src;
+		}
+
+		var saveIframePdfs = function(pdf) {
+			log.info("got pdf", pdf);
+			data.pdfs.push({link: pdf});
+		}
+
+		var handleResult = function(){
+			log.info("finally done", data.pdfs);
+			if(cb && data.pdfs.length){
+				log.info("assigning links", "callback is");
+				links = data.pdfs;
+				cb.call(this, links);
+			}	
+		};
+
+		var nn = new Nightmare();
+		
+		/* Queue up all the commands */
+		_.each(data.orders, function(order) {
+			log.info("going to link", order);
+			nn.goto(order.link)
+			//nn.screenshot('poko.png')
+			nn.wait()
+			nn.evaluate(getIframePdf, saveIframePdfs)
+		});
+
+		/* Run queue with final callback */
+		nn.run(handleResult);
+
+		
+	};
 
 	var parseLinks = function(ctype, cno, cyear){
 		        var els = document.querySelectorAll('button[onclick*="location\.href\="].LongCaseNoBtn');
@@ -66,14 +107,16 @@ scrapeDelhiHighCourt = function(project, callback) {
 		        return links;
 		    }
 
+	log.info("project:", project.ctype, project.cno, project.cyear);
+
 	nm.goto('http://delhihighcourt.nic.in/case.asp')
-		    .select('select[name="ctype"]', project.ctype)
-		    .type('input[name="cno"]', project.cnum+'')
-		    .select('select[name="cyear"]', project.cyear)
+			.select('select[name="ctype"]', project.ctype)
+		    .type('input[name="cno"]', project.cno+'')
+		    .select('select[name="cyear"]', project.cyear+'')
 		    .click('input[name="submit"]')
 		    .wait()
 		    .click('button[onclick*="case"]')
 		    .wait()
-		    .evaluate(parseLinks, handleResult, project.ctype, project.cnum, project.cyear)
-		    .run();
+		    .evaluate(parseLinks, handleResult, project.ctype, project.cno, project.cyear)
+		    .run(fetchPdfs);
 }
