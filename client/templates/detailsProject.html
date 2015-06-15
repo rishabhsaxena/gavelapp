@@ -12,7 +12,7 @@
             {{#if orderFetched}}
               {{ #each orders}}
                 <tr>
-                  <a href="#" onclick="window.open('{{link}}', '_system');">{{link}}</a>
+                  <a href="#" onclick="window.open('{{link}}', '_system');" class="btn -large waves-effect waves-light indigo dark-2">Order <i class="mdi-action-schedule"></i>{{time ago}}</a>
                 </tr>
               {{ /each }}
             {{else}}

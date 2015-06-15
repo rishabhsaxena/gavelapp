@@ -1,6 +1,13 @@
 <template name="projectsList">
 	<style type="text/css">
+    .card .card-title {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .card .card-content .card-title {
+      line-height: 20px;
 
+    }
 	</style>
 	<div class="projectlist">
 		<!-- <div class="row center head">
@@ -26,22 +33,22 @@
 			{{/each}}
 		</div> -->
 		{{#each projects}}
-    <!-- <a href='/projects/{{_id}}'>Order</a> -->
+    <!-- <a href="/projects/{{_id}}">Order</a> -->
 			<div class="card">
 				<div class="card-content">
 					<div class="card-title activator grey-text text-darken-4">
 						<div class="row activator">
-							<div class="col s4 activator">{{title}}</div>
+							<div class="col s3 activator" style="word-wrap: break-word;">{{title}}</div>
 							<div class="col s4 activator">{{ctype}}/{{cnum}}/{{cyear}}</div>
-              <div class="col s2 activator"><i class="mdi-social-notifications"></i>3</div>
 							<i class="mdi-navigation-more-vert right"></i>
+              <i class="mdi-social-notifications right">3</i>
 						</div>
             <!-- <span class="card-title activator grey-text text-darken-4">{{title}} <i class="mdi-navigation-more-vert right"></i></span>
             <p>{{ctype}}/{{cnum}}/{{cyear}}</p> -->
 					</div>
 				</div>
-				<div class="card-reveal">
-					<div class="card-title grey-text text-darken-4">{{title}} <i class="mdi-navigation-close right"></i></div>
+        <div class="card-reveal">
+    			<div class="card-title grey-text text-darken-4">{{title}} <i class="mdi-navigation-close right"></i></div>
 					<!-- {{#if orderFetched}}
 						{{ #each orders}}
 							<p>
@@ -56,16 +63,18 @@
               {{#if orderFetched}}
                 {{#each orders}}
                   <tr>
-                    <a href="#" onclick="window.open('{{link}}', '_system');">{{link}}</a>
+                    <a href="#" onclick="window.open('{{link}}', '_system');" class="btn -large waves-effect waves-light">Order <i class="mdi-action-schedule"></i>{{time ago}}</a>
                   </tr>
                 {{ /each }}
               {{else}}
-                Orders Not Found
+                Orders Not Found<br/>
+                sdvsLnbslb<br/>
+                ssnlsmbs
               {{/if}}
             </tbody>
           </table>
-				</div>
-			</div>
-		{{/each}}
+    		</div>
+      </div>
+    {{/each}}
 	</div>
 </template>
