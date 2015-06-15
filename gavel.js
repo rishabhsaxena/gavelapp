@@ -74,9 +74,8 @@ if (Meteor.isClient) {
   }
 
   Template.nav.events({
-    'click .logout' : function(e){
-      e.preventDefault();
-      AccountsTemplates.logout();
+    'click .logout' : function(){
+      Meteor.logout();
     },
     'click .tour' : function(){
       Router.go('tour');
