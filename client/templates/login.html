@@ -1,3 +1,29 @@
 <template name="login">
-  {{> atForm}}
+  <style type="text/css">
+    .submit{
+      background-color:#2962ff;
+    }
+    .submit:hover{
+      background-color: #3a7abd;
+    }
+    .header{
+      display:none;
+    }
+    label {
+      padding-bottom: 2px;
+    }
+    .btn {
+      height:35px;
+      font-size: 15px;
+    }
+  </style>
+  <div class="plate blue accent-4">
+    <div class="image" style="text-align: center;">
+      <img src="/resources/images/gavel1.png" alt="gavel" height="100" width="150"/>
+    </div>
+    <div class="row"><div class="col s12 lw">Sign up to see orders for your cases</div></div>
+  </div>
+  <div class="body" style="text-align: center;">
+    {{> atForm}}
+  </div>
 </template>

@@ -1,22 +1,45 @@
 <template name="projectsList">
-  <table class='hoverable'>
-          <thead>
-            <tr>
-                <th data-field="suitNumber">Suit Number</th>
-                <th data-field="title">Title</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{ #each projects}}
-            
-              <tr class="projectRow">
-                <td>{{ctype}}/{{cno}}/{{cyear}}</td>
-                <td>{{title}}</td>
-                <td>{{unreadCount}}</td>
-                <td>{{>orderWidget}}</td>
-              </tr>
-            
-            {{ /each }}
-          </tbody>
-  </table>
+  <style type="text/css">
+    .card .card-title {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .card .card-content .card-title {
+      line-height: 20px;
+    }
+    .card {
+      min-height:100px !important;
+      height:auto !important;
+    }
+    .card-reveal {
+      height: 100%;;
+    }
+  </style>
+  <!-- <div class="projectList"> -->
+    {{#each projects}}
+      <div class="card">
+        <div class="card-content">
+          <div class="card-title activator grey-text text-darken-4">
+            <div class="row activator">
+              <div class="col s3 activator" style="word-wrap: break-word;">
+                {{title}}
+              </div>
+              <div class="col s4 activator">
+                {{ctype}}/{{cno}}/{{cyear}}
+              </div>
+  						<i class="mdi-navigation-more-vert right"></i>
+  						<!-- <i class="mdi-social-notifications right">{{unreadCount}}</i> -->
+              <div class="btn-small blue accent-4 right activator white-text" style="font-weight: bold; padding: 5px;">{{unreadCount}} new</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-reveal">
+          <div class="card-title grey-text text-darken-4">
+            {{title}}<i class="mdi-navigation-close right"></i>
+          </div>
+          {{>orderWidget}}
+        </div>
+      </div>
+    {{/each}}
+  <!-- </div> -->
 </template>

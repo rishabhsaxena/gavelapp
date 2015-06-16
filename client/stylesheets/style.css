@@ -1,0 +1,99 @@
+@import url(http://fonts.googleapis.com/css?family=Montserrat:700);
+
+.myButton {
+  background-color:transparent;
+  border-radius:7px;
+  border:1px solid #ffffff;
+  display:inline-block;
+  cursor:pointer;
+  color:#ffffff;
+  font-family:Roboto;
+  font-size:15px;
+  padding: 2px 30px;
+  text-decoration:none;
+  font-weight: bold;
+}
+/*.myButton:hover {
+  background-color:transparent;
+}*/
+.myButton:active {
+  position:relative;
+  top:1px;
+}
+.projectlist{
+  padding-top : 10px;
+}
+.head{
+  font-weight: bold;
+  font-size: 20px;
+}
+.projectRow{
+  font-size: 16px;
+}
+.lw {
+  font-size: 25px;
+  text-align:  center;
+  color:  #fff;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-family: 'Montserrat', Roboto;
+}
+.image{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.plate{
+  /*background-color: #2962ff;*/
+  font-family:  Roboto;
+}
+.at-form{
+  padding: 10px 20px;
+}
+.at-signup{
+  color: #2962ff;
+}
+.at-signup:hover{
+  color: #3a7abd;
+}
+#at-facebook, #at-google{
+  margin-bottom: 15px;
+}
+#at-btn{
+  margin-top: 20px;
+}
+#at-field-password, #at-field-email, #at-field-password_again{
+  text-align: center;
+  font-size: 15px;
+  color: #727272;
+  height: 30px;
+}
+.at-signup-link, .at-signin-link {
+  color: #545454;
+  font-size: 15px;
+  text-align: center;
+}
+#at-signUp, #at-signIn{
+  font-size:  15px;
+  text-transform: uppercase;
+}
+.at-sep{
+  font-size: 15px;
+  padding-bottom: 10px;
+}
+.submit_button{
+  text-align: center;
+}
+
+a {
+  color:inherit;
+  text-decoration: none;
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+  color: #2962ff;
+  font-size: 1rem;
+}
+
+.slider .indicators .indicator-item.active {
+  background-color: #0d47a1;
+}

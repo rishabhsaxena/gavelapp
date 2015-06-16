@@ -1,34 +1,34 @@
 <template name="detailsProject">
-  {{>nav}} 
+  {{>nav}}
   <table class='hoverable'>
-          <thead>
-            {{#if orderFetched}}
-            <tr>
-                <th data-field="title">Tap to open order</th>
-            </tr>
-            {{/if}}
-          </thead>
-          <tbody>
-            {{>orderWidget}}
-          </tbody>
+    <thead>
+      {{#if orderFetched}}
+      <tr>
+        <th data-field="title">Tap to open order</th>
+      </tr>
+      {{/if}}
+    </thead>
+    <tbody>
+      {{>orderWidget}}
+    </tbody>
   </table>
 </template>
 
 <template name="orderWidget">
-{{#if orderFetched}}
-              {{ #each orders}}
-                <tr>
-                  {{> viewOrderLink}}
-                  {{timeAgo}}
-                  {{> isOrderViewed}}
-                </tr>
-              {{ /each }}
-            {{else}}
-              Orders Not Found
-            {{/if}}
+  {{#if orderFetched}}
+    {{ #each orders}}
+      <tr>
+        {{> viewOrderLink}}
+        <!-- {{timeAgo}}
+        {{> isOrderViewed}} -->
+      </tr>
+    {{ /each }}
+  {{else}}
+    Orders Not Found
+  {{/if}}
 </template>
 
-<template name="isOrderViewed">
+<!-- <template name="isOrderViewed">
 <span >
   {{#if viewed}}
     <span class="orderViewed">viewed</span>
@@ -36,10 +36,24 @@
     <span class="orderNotViewed">
     not viewed
     </span>
-  {{/if}}  
+  {{/if}}
 </span>
-</template>
+</template> -->
 
 <template name="viewOrderLink">
-  <a href="#" onclick="" class="view-order">https://docs.google.com/viewer?url={{link}}</a>
+  <style type="text/css">
+    a{
+      margin-top: 5px;
+      font-size: 18px;
+    }
+  </style>
+  {{#if viewed}}
+    <a href="#" onclick="" class="view-order btn waves-effect btn-light blue">
+      Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="mdi-action-schedule"></i>&nbsp;&nbsp;&nbsp;{{timeAgo}}
+    </a>
+  {{else}}
+    <a href="#" onclick="" class="view-order btn waves-effect btn-light red">
+      Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="mdi-action-schedule"></i>&nbsp;&nbsp;&nbsp;{{timeAgo}}
+    </a>
+  {{/if}}
 </template>
