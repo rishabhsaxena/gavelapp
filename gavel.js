@@ -46,22 +46,6 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.detailsProject.helpers({
-    'yo' : function(){
-      debugger;
-    },
-    'orders' : function(){
-      return this.orders();
-    },
-    'orderFetched' : function(){
-      if (this.orders().length > 0){
-        return true;
-      }else{
-        return false;
-      }
-    }
-  });
-
   Template.nav.rendered = function() { 
       $('.dropdown-button').dropdown({
         inDuration: 300,

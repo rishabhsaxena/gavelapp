@@ -9,7 +9,13 @@
             {{/if}}
           </thead>
           <tbody>
-            {{#if orderFetched}}
+            {{>orderWidget}}
+          </tbody>
+  </table>
+</template>
+
+<template name="orderWidget">
+{{#if orderFetched}}
               {{ #each orders}}
                 <tr>
                   {{> viewOrderLink}}
@@ -20,9 +26,6 @@
             {{else}}
               Orders Not Found
             {{/if}}
-            
-          </tbody>
-  </table>
 </template>
 
 <template name="isOrderViewed">
