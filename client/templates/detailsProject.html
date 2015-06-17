@@ -19,26 +19,12 @@
     {{ #each orders}}
       <tr>
         {{> viewOrderLink}}
-        <!-- {{timeAgo}}
-        {{> isOrderViewed}} -->
       </tr>
     {{ /each }}
   {{else}}
-    Orders Not Found
+    <tr><br/>No Orders Found.</tr>
   {{/if}}
 </template>
-
-<!-- <template name="isOrderViewed">
-<span >
-  {{#if viewed}}
-    <span class="orderViewed">viewed</span>
-  {{else}}
-    <span class="orderNotViewed">
-    not viewed
-    </span>
-  {{/if}}
-</span>
-</template> -->
 
 <template name="viewOrderLink">
   <style type="text/css">
@@ -48,12 +34,12 @@
     }
   </style>
   {{#if viewed}}
-    <a href="#" onclick="" class="view-order btn waves-effect btn-light blue">
-      Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="mdi-action-schedule"></i>&nbsp;&nbsp;&nbsp;{{timeAgo}}
+    <a href="#" onclick="" class="view-order btn-small waves-effect btn-light blue white-text" style="padding: 10px;">
+      Order&nbsp;&nbsp;&nbsp;<i class="mdi-action-schedule"></i>&nbsp;{{timeAgo}}
     </a>
   {{else}}
-    <a href="#" onclick="" class="view-order btn waves-effect btn-light red">
-      Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="mdi-action-schedule"></i>&nbsp;&nbsp;&nbsp;{{timeAgo}}
+    <a href="#" onclick="" class="view-order btn-small waves-effect btn-light red white-text" style="padding: 10px;">
+      Order&nbsp;&nbsp;&nbsp;<i class="mdi-action-schedule"></i>&nbsp;{{timeAgo}}
     </a>
   {{/if}}
 </template>
