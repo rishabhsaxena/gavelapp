@@ -22,24 +22,20 @@
       </tr>
     {{ /each }}
   {{else}}
-    <div style="padding-top:10px;">No Orders Found.</div>
+    <div class="no-order">No Orders Found.</div>
   {{/if}}
 </template>
 
 <template name="viewOrderLink">
-  <style type="text/css">
-    a{
-      margin-top: 5px;
-      font-size: 18px;
-    }
-  </style>
-  {{#if viewed}}
-    <a href="#" onclick="" class="view-order btn-small waves-effect btn-light blue white-text" style="padding: 10px;">
-      Order&nbsp;&nbsp;&nbsp;<i class="mdi-action-schedule"></i>&nbsp;{{timeAgo}}
-    </a>
-  {{else}}
-    <a href="#" onclick="" class="view-order btn-small waves-effect btn-light red white-text" style="padding: 10px;">
-      Order&nbsp;&nbsp;&nbsp;<i class="mdi-action-schedule"></i>&nbsp;{{timeAgo}}
-    </a>
-  {{/if}}
+  <div class="vieworder">
+    {{#if viewed}}
+      <a href="#" onclick="" class="view-order btn-small waves-effect btn-light blue white-text" style="padding: 10px;">
+        Order&nbsp;&nbsp;&nbsp;<i class="mdi-action-schedule"></i>&nbsp;{{timeAgo}}
+      </a>
+    {{else}}
+      <a href="#" onclick="" class="view-order btn-small waves-effect btn-light red white-text" style="padding: 10px;">
+        Order&nbsp;&nbsp;&nbsp;<i class="mdi-action-schedule"></i>&nbsp;{{timeAgo}}
+      </a>
+    {{/if}}
+  </div>
 </template>

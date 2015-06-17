@@ -1,45 +1,36 @@
 <template name="projectsList">
-  <style type="text/css">
-    .card .card-title {
-      font-size: 14px;
-      font-weight: bold;
-    }
-    .card .card-content .card-title {
-      line-height: 20px;
-    }
-    .card {
-      min-height:100px !important;
-      height:100% !important;
-    }
-    .card-reveal {
-      height: 100%;
-    }
-  </style>
-  <!-- <div class="projectList"> -->
-    {{#each projects}}
-      <div class="card">
-        <div class="card-content">
-          <div class="card-title activator grey-text text-darken-4">
-            <div class="row activator">
-              <div class="col s3 activator" style="word-wrap: break-word;">
-                {{title}}
-              </div>
-              <div class="col s6 activator" style="word-wrap: break-word;">
-                {{ctype}}/{{cno}}/{{cyear}}
-              </div>
-  						<i class="mdi-navigation-more-vert right"></i>
-  						<!-- <i class="mdi-social-notifications right">{{unreadCount}}</i> -->
-              <div class="btn-small blue accent-4 right activator white-text" style="font-weight: bold; padding: 5px;">{{unreadCount}} new</div>
+	{{#each projects}}
+		<div class="card">
+			<div class="card-content">
+				<div class="card-title activator grey-text text-darken-4">
+					<div class="row activator">
+            <div class="ctitle">
+  						<div class="col s3 activator">
+  							{{title}}
+  						</div>
             </div>
-          </div>
-        </div>
-        <div class="card-reveal">
-          <div class="card-title grey-text text-darken-4">
-            {{title}}<i class="mdi-navigation-close right"></i>
-          </div>
-          {{>orderWidget}}
-        </div>
-      </div>
-    {{/each}}
-  <!-- </div> -->
+            <div class="cnumber">
+  						<div class="col s6 activator">
+  							{{ctype}}/{{cno}}/{{cyear}}
+  						</div>
+            </div>
+						<i class="mdi-navigation-more-vert right"></i>
+            {{#with countunread}}
+              <div class="btn-small blue accent-4 right activator white-text">{{this}} new</div>
+            {{/with}}
+					</div>
+				</div>
+			</div>
+			<div class="card-reveal">
+				<div class="card-title grey-text text-darken-4">
+          {{title}}
+          <i class="mdi-navigation-close right"></i>
+          {{#with countunread}}
+            <div class="btn-small blue accent-4 right white-text">{{this}} new</div>
+          {{/with}}
+				</div>
+				{{>orderWidget}}
+			</div>
+		</div>
+	{{/each}}
 </template>
