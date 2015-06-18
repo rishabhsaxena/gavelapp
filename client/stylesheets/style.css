@@ -1,5 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Montserrat:700);
 
+/*landing page*/
 .myButton {
   background-color:transparent;
   border-radius:7px;
@@ -20,15 +21,10 @@
   position:relative;
   top:1px;
 }
-.projectlist{
-  padding-top : 10px;
-}
+
 .head{
   font-weight: bold;
   font-size: 20px;
-}
-.projectRow{
-  font-size: 16px;
 }
 .lw {
   font-size: 25px;
@@ -46,6 +42,8 @@
   /*background-color: #2962ff;*/
   font-family:  Roboto;
 }
+
+/*login*/
 .at-form{
   padding: 10px 20px;
 }
@@ -80,9 +78,6 @@
   font-size: 15px;
   padding-bottom: 10px;
 }
-.submit_button{
-  text-align: center;
-}
 
 a {
   color:inherit;
@@ -100,38 +95,47 @@ a {
 
 /*detailsProject*/
 .vieworder a{
-    margin-top: 5px;
-    font-size: 16px;
+    font-size: 15px;
+    text-transform: uppercase;
 }
 .vieworder{
-  margin-top: 20px;
+  margin: 5px 10px;
+  text-align: center;
 }
 .no-order{
-  padding-top: 10px;
+  padding: 10px 0px;
+  text-align: center;
 }
 
 /*projectList*/
-.card .card-title {
-  font-size: 14px;
-  font-weight: bold;
-  line:height: 20px;
-}
-.card .card-content .card-title {
-  line-height: 20px;
-}
-.card {
-  min-height:120px !important;
-  height:100% !important;
-}
 .ctitle, .cnumber{
   word-wrap: break-word;
-}
-.card-reveal {
-  height: 100%;
+  line-height: 1.5rem;
 }
 .btn-small{
   font-weight: bold;
-  padding: 5px;
+  padding: 4px 7px;
+}
+.new-tag{
+  padding: 5px 5px;
+  font-size: 13px;
+  font-weight: bold;
+}
+/*.new-tag .btn-small{
+  padding: 0px 5px;
+  font-size: 13px;
+}*/
+.collapsible-header{
+  height: auto;
+  padding: .5rem 0rem;
+  line-height: 1.5rem;
+}
+.collapsible-header .row{
+  padding-top:0.5rem;
+}
+.collapsible-header i {
+  margin-right: 0px;
+  margin-left: 0px;
 }
 
 /*addButton*/
@@ -145,4 +149,7 @@ addbutton{
 }
 .btn:hover{
   background-color: #3a7abd;
+}
+.submit_button{
+  text-align: center;
 }
