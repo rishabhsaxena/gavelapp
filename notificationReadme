@@ -1,0 +1,18 @@
+##format
+
+Push.send({from: 'tester',
+		   title: 'testing notifications!',
+		   text: 'can you see me ?', 	
+		   query: {userId: 'MTXsQhyNCe8DpMJ4N'}
+		   });
+
+the parameter userId is the addressee.
+
+thats it.
+
+
+****************************************
+To test. run app normally on device.
+->then run 'meteor shell'  from project directory.
+->then run above command i.e. Push.send  
+Note: commands run on meteor shell are just running on the server. good for debugging.
