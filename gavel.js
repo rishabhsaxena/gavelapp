@@ -28,7 +28,6 @@ if (Meteor.isClient) {
 
   Template.projectsList.helpers({
     'projects' : function(){
-      debugger;
       return Projects.find();
     }
   });
@@ -60,7 +59,10 @@ if (Meteor.isClient) {
 
   Template.nav.events({
     'click .logout' : function(){
-      AccountsTemplates.logout();
+      Meteor.logout();
+    },
+    'click .tour' : function(){
+      Router.go('tour');
     }
   }) 
 }

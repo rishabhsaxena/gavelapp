@@ -16,6 +16,39 @@
       height:35px;
       font-size: 15px;
     }
+    .socialLogin img{
+      width: 100%;
+    }
+    .or-sep{
+      text-align: center;
+      color: #ccc;
+      position: relative;
+    }
+    .or-sep:after, .or-sep:before{
+      display: block;
+      width: 37%;
+      content: " ";
+      border-top: 1px solid #ddd;
+      height: 1px;
+      position: absolute;
+      left: 15px;
+      top: 48%;
+    }
+    .or-sep:after{
+      right: 15px;
+      left: auto;      
+    }
+    .footer{
+      position: fixed;
+      bottom: 0px;
+      width: 100%;
+    }
+    .fbBtn, .gBtn{
+      cursor: pointer;
+    }
+    #login-btn, #register-btn{
+      width: 100%;
+    }
   </style>
   <div class="plate blue accent-4">
     <div class="image" style="text-align: center;">
@@ -23,7 +56,39 @@
     </div>
     <div class="row"><div class="col s12 lw">Sign up to see orders for your cases</div></div>
   </div>
-  <div class="body" style="text-align: center;">
-    {{> atForm}}
+  <div class="row">
+    <form id="login-form" class="col s12" action="action">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="login-email" type="email" class="validate">
+            <label for="email">Email</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="login-password" type="password" class="validate">
+            <label for="password">Password</label>
+          </div>
+          <div class="input-field col s6">
+            <input type="button" id="login-btn" class="waves-effect waves-light btn" value="Sign in">
+          </div>
+          <div class="input-field col s6">
+            <input type="button" id="register-btn" class="waves-effect waves-light btn" value="Register">
+          </div>
+        </div>
+     </form> 
+  </div>
+  <div class="footer">
+    <div class="row">
+      <div class="col s12 or-sep">
+        <strong>OR</strong>
+      </div>
+    </div>
+    <div class="row socialLogin">
+      <div class="col s6">
+        <img src="/resources/images/login-facebook.png" class="fbBtn">
+      </div>
+      <div class="col s6">
+        <img src="/resources/images/login-google.png" class="gBtn">
+      </div>
+    </div>
   </div>
 </template>
