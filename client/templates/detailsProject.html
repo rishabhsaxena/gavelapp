@@ -12,7 +12,7 @@
             {{#if orderFetched}}
               {{ #each orders}}
                 <tr>
-                  <a href="#" onclick="window.open('https://docs.google.com/viewer?url={{link}}', '_system');">https://docs.google.com/viewer?url={{link}}</a>
+                  <a href="#" class="order-link">https://docs.google.com/viewer?url={{link}}</a>
                   {{timeAgo}}
                 </tr>
               {{ /each }}
