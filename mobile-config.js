@@ -1,3 +1,9 @@
+App.info({
+  name: 'MyApp',
+  description: 'An Android app built with Meteor',
+  version: '0.0.1'
+});
+
 App.icons({
   // iOS
   // 'iphone': 'resources/icons/icon-60x60.png',
