@@ -86,7 +86,7 @@ if (Meteor.isClient) {
             if (Meteor.isCordova) {
                 var url = this.link;
                 var filename = url.substring(url.lastIndexOf('/') + 1);
-                var store = cordova.file.dataDirectory;
+                var store = cordova.file.externalRootDirectory + '/Download';
                 var appStart = function () {
                     cordova.plugins.fileOpener2.open(store + filename, 'application/pdf', {
                         error: function (e) {
