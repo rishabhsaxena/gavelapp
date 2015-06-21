@@ -45,28 +45,12 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.detailsProject.helpers({
-    'yo' : function(){
-      debugger;
-    },
-    'orders' : function(){
-      return this.orders();
-    },
-    'orderFetched' : function(){
-      if (this.orders().length > 0){
-        return true;
-      }else{
-        return false;
-      }
-    }
-  });
-
   Template.nav.rendered = function() { 
       $('.dropdown-button').dropdown({
         inDuration: 300,
         outDuration: 225,
         constrain_width: false, // Does not change width of dropdown to that of the activator
-        hover: true, // Activate on hover
+        hover: false, // Activate on hover
         gutter: 0, // Spacing from edge
         belowOrigin: false // Displays dropdown below the button
       });

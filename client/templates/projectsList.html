@@ -1,36 +1,39 @@
 <template name="projectsList">
-
-  <div class="projectlist">
-    <div class="row center head">
-      <div class="col s6" data-field="suitNumber">
-        Suit Number
-      </div>
-      <div class="col s6" data-field="title">
-        Title
-      </div>
-    </div>
-    
-      {{#each projects}}
-
-      <a href='/projects/{{_id}}'>
-
-      <div class="projectRow">
-
-        <div class="row center">
-          <div class="col s6">
-            {{ctype}}/{{cno}}/{{cyear}}
-          </div>
-          <div class="col s6">
-            {{title}}
-          </div>
-        </div>
-      </div>
-      </a>
-
-      
-
-      {{/each}}
-    
-  </div>
+<div class="collapse">
+			<ul class="collapsible" data-collapsible="expandable">
+				{{#each projects}}
+    			{{>collapseList}}
+    		{{/each}}
+  		</ul>
+		</div>
 </template>
 
+<template name="collapseList">
+	<li>
+		<div class="collapsible-header">
+			<div class="row">
+				<div class="ctitle">
+					<div class="col s3">
+						{{title}}
+					</div>
+				</div>
+				<div class="cnumber">
+					<div class="col s5">
+						{{ctype}}/{{cno}}/{{cyear}}
+					</div>
+				</div>
+				<div class="col s4">
+					<i class="mdi-navigation-more-vert right"></i>
+					{{#with countunread}}
+						<div class="new-tag">
+							<div class="new-tag blue accent-4 right white-text">{{this}} new</div>
+						</div>
+					{{/with}}
+				</div>
+			</div>
+		</div>
+		<div class="collapsible-body">
+			{{>orderWidget}}
+		</div>
+	</li>
+</template>

@@ -80,6 +80,7 @@ var addScraperProcessor = function(job, cb) {
             project.insertOrders(links);
             project = Projects.findOne(project._id);
             project.orders = project.orders();
+            project.unreadCount = project.unreadCount();
             // project.path = sprintf('projects/%s', project._id);
             // var subject = sprintf('[%s] New orders fetched for matter: %s', project._id, project.name)
             // console.log("orders:", project.orders, links);

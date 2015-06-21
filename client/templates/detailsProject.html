@@ -1,25 +1,25 @@
-<template name="detailsProject">
-  {{>nav}}
-  <table class='hoverable'>
-          <thead>
-            {{#if orderFetched}}
-            <tr>
-                <th data-field="title">Tap to open order</th>
-            </tr>
-            {{/if}}
-          </thead>
-          <tbody>
-            {{#if orderFetched}}
-              {{ #each orders}}
-                <tr>
-                  <a href="#" onclick="window.open('https://docs.google.com/viewer?url={{link}}', '_system');">https://docs.google.com/viewer?url={{link}}</a>
-                  {{timeAgo}}
-                </tr>
-              {{ /each }}
-            {{else}}
-              Orders Not Found
-            {{/if}}
+<template name="orderWidget">
+  {{#if orderFetched}}
+    {{ #each orders}}
+      <tr>
+        {{> viewOrderLink}}
+      </tr>
+    {{ /each }}
+  {{else}}
+    <div class="no-order">No Orders Found.</div>
+  {{/if}}
+</template>
 
-          </tbody>
-  </table>
+<template name="viewOrderLink">
+  <div class="vieworder">
+    {{#if viewed}}
+      <a href="#" onclick="" class="view-order btn-small waves-effect btn-light blue white-text">
+        Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="mdi-action-schedule"></i>&nbsp;&nbsp;{{timeAgo}}
+      </a>
+    {{else}}
+      <a href="#" onclick="" class="view-order btn-small waves-effect btn-light red white-text">
+        Order&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="mdi-action-schedule"></i>&nbsp;&nbsp;{{timeAgo}}
+      </a>
+    {{/if}}
+  </div>
 </template>
