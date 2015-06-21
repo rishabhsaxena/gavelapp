@@ -6,7 +6,7 @@ Push.addListener('message', function(notification) {
 		window.alert = navigator.notification.alert;
 	}
 
-	alert(notification.message);
+	//alert(notification.message);
 
 
 	/*below is an example - not used in app*/
