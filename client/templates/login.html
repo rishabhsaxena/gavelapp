@@ -1,94 +1,148 @@
 <template name="login">
-  <style type="text/css">
-    .submit{
-      background-color:#2962ff;
-    }
-    .submit:hover{
-      background-color: #3a7abd;
-    }
-    .header{
-      display:none;
-    }
-    label {
-      padding-bottom: 2px;
-    }
-    .btn {
-      height:35px;
-      font-size: 15px;
-    }
-    .socialLogin img{
-      width: 100%;
-    }
-    .or-sep{
-      text-align: center;
-      color: #ccc;
-      position: relative;
-    }
-    .or-sep:after, .or-sep:before{
-      display: block;
-      width: 37%;
-      content: " ";
-      border-top: 1px solid #ddd;
-      height: 1px;
-      position: absolute;
-      left: 15px;
-      top: 48%;
-    }
-    .or-sep:after{
-      right: 15px;
-      left: auto;      
-    }
-    .footer{
-      position: fixed;
-      bottom: 0px;
-      width: 100%;
-    }
-    .fbBtn, .gBtn{
-      cursor: pointer;
-    }
-    #login-btn, #register-btn{
-      width: 100%;
-    }
-  </style>
-  <div class="plate blue accent-4">
-    <div class="image" style="text-align: center;">
-      <img src="/resources/images/gavel1.png" alt="gavel" height="100" width="150"/>
-    </div>
-    <div class="row"><div class="col s12 lw">Sign up to see orders for your cases</div></div>
-  </div>
-  <div class="row">
-    <form id="login-form" class="col s12" action="action">
+    <style type="text/css">
+        .plate .row {
+            margin-bottom: 0;
+        }
+
+        #login-btn, #register-btn {
+            width: 100%;
+        }
+
+        .tabs .indicator {
+            background: white;
+        }
+
+        .tabs .tab {
+            font-weight: bold;
+        }
+
+        .input-field input {
+            margin-bottom: 0px;
+        }
+
+        form input.btn-flat {
+            padding: 0 !important;
+        }
+
+        #forgot-btn {
+            width: auto;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+        }
+
+        footer .row {
+            margin-bottom: 0;
+        }
+
+        .or-sep {
+            text-align: center;
+            color: #ccc;
+            position: relative;
+        }
+
+        .or-sep:after, .or-sep:before {
+            display: block;
+            width: 37%;
+            content: " ";
+            border-top: 1px solid #ddd;
+            height: 1px;
+            position: absolute;
+            left: 15px;
+            top: 48%;
+        }
+
+        .or-sep:after {
+            right: 15px;
+            left: auto;
+        }
+
+        .socialLogin img {
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+    <div class="plate blue accent-4">
         <div class="row">
-          <div class="input-field col s12">
-            <input id="login-email" type="email" class="validate">
-            <label for="email">Email</label>
-          </div>
-          <div class="input-field col s12">
-            <input id="login-password" type="password" class="validate">
-            <label for="password">Password</label>
-          </div>
-          <div class="input-field col s6">
-            <input type="button" id="login-btn" class="waves-effect waves-light btn" value="Sign in">
-          </div>
-          <div class="input-field col s6">
-            <input type="button" id="register-btn" class="waves-effect waves-light btn" value="Register">
-          </div>
+            <div><img src="/resources/images/gavel1.png" alt="gavel" style="width: 30%;"/></div>
+            <div class="lw">Sign up to see orders for your cases</div>
         </div>
-     </form> 
-  </div>
-  <div class="footer">
+        <div class="row">
+            <ul class="tabs blue accent-4">
+                <li class="tab col s6"><a class="active white-text" href="#login">Sign In</a></li>
+                <li class="tab col s6"><a class="white-text" href="#register">Register</a></li>
+            </ul>
+        </div>
+    </div>
     <div class="row">
-      <div class="col s12 or-sep">
-        <strong>OR</strong>
-      </div>
+        <div id="login" class="col s12">
+            {{> login_form }}
+        </div>
+        <div id="register" class="col s12">
+            {{> register_form }}
+        </div>
     </div>
-    <div class="row socialLogin">
-      <div class="col s6">
-        <img src="/resources/images/login-facebook.png" class="fbBtn">
-      </div>
-      <div class="col s6">
-        <img src="/resources/images/login-google.png" class="gBtn">
-      </div>
+    <footer>
+        <div class="row">
+            <div class="col s12 or-sep">
+                <strong>OR</strong>
+            </div>
+        </div>
+        <div class="row socialLogin">
+            <div class="col s6">
+                <img src="/resources/images/login-facebook.png" class="fbBtn">
+            </div>
+            <div class="col s6">
+                <img src="/resources/images/login-google.png" class="gBtn">
+            </div>
+        </div>
+    </footer>
+</template>
+
+<template name="login_form">
+    <form id="login-form" class="col s12">
+        <div class="row">
+            {{> login_fields}}
+        </div>
+        <div class="row">
+            <div class="col s6">
+                <b><input type="button" id="forgot-btn" class="btn-flat teal-text" value="Forgot?"></b>
+            </div>
+            <div class="col s6">
+                <button id="login-btn" class="blue accent-4 btn waves-effect waves-light" type="submit"><b>Proceed</b>
+                </button>
+            </div>
+        </div>
+    </form>
+</template>
+
+<template name="register_form">
+    <form id="register-form" class="col s12">
+        <div class="row">
+            {{> login_fields}}
+            <div class="input-field col s12">
+                <input id="confirm-password" type="password" class="validate">
+                <label for="password">Confirm Password</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <button id="register-btn" class="blue accent-4 btn waves-effect waves-light" type="submit">
+                    <b>Proceed</b></button>
+            </div>
+        </div>
+    </form>
+</template>
+
+<template name="login_fields">
+    <div class="input-field col s12">
+        <input id="email" type="email" class="validate">
+        <label for="email">Email</label>
     </div>
-  </div>
+    <div class="input-field col s12">
+        <input id="password" type="password" class="validate">
+        <label for="password">Password</label>
+    </div>
 </template>
