@@ -35,8 +35,7 @@
   font-size: 20px;
 }
 .lw {
-  font-size: 25px;
-  text-align:  center;
+  font-size: 0.8em;
   color:  #fff;
   margin-bottom: 10px;
   text-transform: uppercase;
@@ -48,7 +47,9 @@
 }
 .plate{
   /*background-color: #2962ff;*/
+  padding-top: 10px;
   font-family:  Roboto;
+  text-align: center;;
 }
 
 /*login*/

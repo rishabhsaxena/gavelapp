@@ -1,22 +1,18 @@
+Template.login.rendered = function () {
+    $(this.findAll('ul.tabs')).tabs();
+};
 Template.login.events({
     'click .fbBtn': function () {
         Meteor.loginWithFacebook();
     },
     'click .gBtn': function () {
         Meteor.loginWithGoogle();
-    },
-    'click #register-btn': function(event, template){
-        loginRegisterUser(template, function(email, password){
-            Accounts.createUser({email: email, password: password}, function (err) {
-                if (err)
-                    Materialize.toast(err.reason, 2000);
-                else
-                    Router.go('projects');
-            });
-        });
-    },
-    'click #login-btn': function (event, template) {
-        loginRegisterUser(template, function (email, password) {
+    }
+});
+Template.login_form.events({
+    "submit #login-form": function (event, template) {
+        event.preventDefault();
+        loginRegisterUser(template, false, function (email, password) {
             Meteor.loginWithPassword(email, password, function (err) {
                 if (err)
                     Materialize.toast(err.reason, 2000);
@@ -26,14 +22,38 @@ Template.login.events({
         });
     }
 });
-var loginRegisterUser = function(template, callback){
-    var passwordElement = template.find("#login-password"),
-        emailElement = template.find("#login-email");
+Template.register_form.events({
+    "submit #register-form": function (event, template) {
+        event.preventDefault();
+        loginRegisterUser(template, true, function (email, password) {
+            Accounts.createUser({email: email, password: password}, function (err) {
+                if (err)
+                    Materialize.toast(err.reason, 2000);
+                else
+                    Router.go('projects');
+            });
+        });
+    }
+});
+var loginRegisterUser = function (template, isRegister, callback) {
+    var passwordElement = template.find("#password"),
+        emailElement = template.find("#email");
     var email = trimInput(emailElement.value),
         password = passwordElement.value;
-    if(email.length)
-        if (isValidPassword(password))
-            callback(email, password);
+    if (email.length)
+        if (isValidPassword(password)) {
+            if (isRegister) {
+                var confirmPasswordElement = template.find("#confirm-password");
+                if (passwordElement.value == confirmPasswordElement.value)
+                    callback(email, password);
+                else {
+                    $(confirmPasswordElement).removeClass('invalid').addClass('invalid');
+                    Materialize.toast('Confirm Password doesn\'t match!', 2000)
+                }
+            }
+            else
+                callback(email, password);
+        }
         else {
             $(passwordElement).removeClass('invalid').addClass('invalid');
             if (password.length)
