@@ -1,6 +1,6 @@
 App.info({
-  name: 'MyApp',
-  description: 'An Android app built with Meteor',
+  name: 'Gavel',
+  description: 'Don anymore time waiting for court updates. Use gavel and get push notifications in realtime.',
   version: '0.0.1'
 });
 
