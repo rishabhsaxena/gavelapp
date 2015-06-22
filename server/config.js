@@ -56,4 +56,6 @@ Meteor.startup(function() {
 		}
 	});
 
+	Kadira.connect('SZE3JbqATezv5yT4m', '1b3a1f5a-c2f6-4e78-9e58-bf9851094fa3')
+
 });
