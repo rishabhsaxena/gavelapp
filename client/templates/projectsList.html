@@ -1,14 +1,17 @@
 <template name="projectsList">
 <div class="collapse">
-			<ul class="collapsible" data-collapsible="expandable">
-				{{#each projects}}
-    			{{>collapseList}}
-    		{{/each}}
-  		</ul>
+
+		<ul class="collapsible" data-collapsible="expandable">
+			{{#each projects}}
+	    	{{>collapseList}}
+	    {{/each}}
+		</ul>
+
 		</div>
 </template>
 
 <template name="collapseList">
+	{{#HammerTouchArea gestureMap=templateGestures}}
 	<li>
 		<div class="collapsible-header">
 			<div class="row">
@@ -36,4 +39,5 @@
 			{{>orderWidget}}
 		</div>
 	</li>
+	{{/HammerTouchArea}}
 </template>
