@@ -1,10 +1,13 @@
-// Write your package code here!
+// Note: this requires redis installed!
+// install redis
+// run it 
+// $ redis-server
 
 var kue = Meteor.npmRequire ('kue');
 
 Queue  = kue.createQueue();
 
-kue.app.listen(3003);
+kue.app.listen(3003); //express app.
 
 Queue.on( 'error', function( err ) {
   console.log( 'Oops... ', err );

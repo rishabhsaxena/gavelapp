@@ -18,6 +18,6 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use('tinytest');
   api.use('kue-test');
-  api.use('wylio:mandrill');
+  api.use('wylio:mandrill'); // need to load mandrill before this package
   api.addFiles('kue-test-tests.js');
 });
