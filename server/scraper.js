@@ -4,40 +4,44 @@ addScraperJob = function(project) {
 	// Logic to find relevant scrape function based on court and scrape results automatically
 	// TODO: Faulty logic. Remove template from here and move this into helpers
 	// remove the old scraper job here
-	removeScraperJob(project);
+	//removeScraperJob(project);
 
 	// Create a new scraper job
-	var job = myJobs.createJob('addScraper', {'project': project});
-	job.repeat({
-	  repeats: Job.forever,   // Rerun this job 5 times,
-	  wait: 4*60*60*1000   // wait 50 seconds between each re-run.
-	});
+	// var job = myJobs.createJob('addScraper', {'project': project});
+	// job.repeat({
+	//   repeats: Job.forever,   // Rerun this job 5 times,
+	//   wait: 4*60*60*1000   // wait 50 seconds between each re-run.
+	// });
+	var data = project
+	queue.create('addScraper', data).priority('high').save();
 	// job.repeat({
 	//   schedule: myJobs.later.parse.text('every 5 hours')   // Rerun this job every 5 minutes
 	// });
 	//job.retry({retries: 4, wait: 4*60*60*1000});
 	log.info("addScraperJob:", "added scraper job");
-	job.save();
+	//job.save();
 }
 
-removeScraperJob = function(project) {
-	log.info("removeScraperJob:", "removing jobs from scraper");
-	var prevJobEntries = myJobs.find({'data.project._id': project._id, 'type':'addScraper'}).fetch();
-	prevJobEntries.forEach(function(entry){
-		var prevJob = new Job(myJobs, entry);
-		prevJob.pause();
-		prevJob.cancel();
-		prevJob.remove();
-	});
-}
+// removeScraperJob = function(project) {
+// 	log.info("removeScraperJob:", "removing jobs from scraper");
+// 	var prevJobEntries = myJobs.find({'data.project._id': project._id, 'type':'addScraper'}).fetch();
+// 	prevJobEntries.forEach(function(entry){
+// 		var prevJob = new Job(myJobs, entry);
+// 		prevJob.pause();
+// 		prevJob.cancel();
+// 		prevJob.remove();
+// 	});
+// }
 
 checkNewLinks = function(project, links) {
 	log.info("checkNewLinks:", "checking new links");
 	// Take order and return link
 	//debugger;
+	log.info("links are:", links);
 	var mapFn = function(order) {
 		return order.link;
 	}
+	debugger;
 	var projectLinksArray = _.map(project.orders(), mapFn);
 	var linkArray = _.map(links, mapFn)
 	log.info((_.isEqual(projectLinksArray.sort(), linkArray.sort())),"new links")

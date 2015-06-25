@@ -19,13 +19,16 @@ addEmailReminder = function(doc, template, message, to, replyTo, subject, date) 
 	doc.message = message
 	var merge_vars = toMandrillArray(doc);
 	log.info("addEmailReminder", merge_vars);
-	console.log('to:',to);
-	var job = myJobs.createJob('addEmail', {'name': 'Send Email', 'template': template, 'merge_vars': merge_vars, 'to': to, 'replyTo': replyTo, 'subject': subject});
+	log.info('to:',to);
+	//var job = myJobs.createJob('addEmail', );
+	//job.retry({retries: 4, wait: 2*60*1000});
+	//job.delay(delayMilliSeconds);
+	//job.save();
+
+	var data = {'name': 'Send Email', 'template': template, 'merge_vars': merge_vars, 'to': to, 'replyTo': replyTo, 'subject': subject}
 	var delayMilliSeconds = Math.max(0, date - new Date());
 	log.info(delayMilliSeconds);
-	job.retry({retries: 4, wait: 2*60*1000});
-	job.delay(delayMilliSeconds);
-	job.save();
+	queue.create('addEmail', data).priority('low').delay(delayMilliSeconds).save();
 }
 
 toMandrillArray = function(obj) {
