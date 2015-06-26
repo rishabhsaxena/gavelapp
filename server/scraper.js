@@ -4,7 +4,7 @@ addScraperJob = function(project) {
 	// Logic to find relevant scrape function based on court and scrape results automatically
 	// TODO: Faulty logic. Remove template from here and move this into helpers
 	// remove the old scraper job here
-	removeScraperJob(project);
+	//removeScraperJob(project);
 
 	// Create a new scraper job
 	// var job = myJobs.createJob('addScraper', {'project': project});
