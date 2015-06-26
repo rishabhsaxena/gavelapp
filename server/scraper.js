@@ -7,17 +7,19 @@ addScraperJob = function(project) {
 	removeScraperJob(project);
 
 	// Create a new scraper job
-	var job = myJobs.createJob('addScraper', {'project': project});
-	job.repeat({
-	  repeats: Job.forever,   // Rerun this job 5 times,
-	  wait: 4*60*60*1000   // wait 50 seconds between each re-run.
-	});
+	// var job = myJobs.createJob('addScraper', {'project': project});
+	// job.repeat({
+	//   repeats: Job.forever,   // Rerun this job 5 times,
+	//   wait: 4*60*60*1000   // wait 50 seconds between each re-run.
+	// });
 	// job.repeat({
 	//   schedule: myJobs.later.parse.text('every 5 hours')   // Rerun this job every 5 minutes
 	// });
 	//job.retry({retries: 4, wait: 4*60*60*1000});
+	var data = project;
+	queue.create('addScraper', data).priority('high').save();
 	log.info("addScraperJob:", "added scraper job");
-	job.save();
+	//job.save();
 }
 
 removeScraperJob = function(project) {
