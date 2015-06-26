@@ -143,16 +143,6 @@ var addScraperProcessor = Meteor.bindEnvironment(function(job, ctx, done) {
     }
 });
 
-var jobOptions = {
-    concurrency: 4,
-    payload: 1,
-    pollInterval: 4000,
-    prefetch: 1
-};
-
-var emailWorkers = myJobs.processJobs('addEmail', jobOptions, addEmailProcessor);
-var scraperWorkers = myJobs.processJobs('addScraper', jobOptions, addScraperProcessor);
-
 // Processor for email task
 queue.process('addEmail', addEmailProcessor);
 

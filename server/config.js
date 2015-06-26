@@ -5,8 +5,6 @@ Meteor.startup(function() {
         key: "2hd3_l9CBJE5Q-DR5QG5RA"
     });
 
-    myJobs.startJobs();
-
     Accounts.loginServiceConfiguration.remove({
     service: "facebook"
 	});
