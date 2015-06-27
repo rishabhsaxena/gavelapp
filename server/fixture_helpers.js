@@ -18,3 +18,15 @@ removeAllProjects = function(){
     var pjs = _.map(projects, function(p){return p._id})
     _.each(pjs, function(id){Projects.remove(id)})
 }
+
+trafficSimulator = function(){
+    removeAllProjects();
+
+    setInterval(Meteor.bindEnvironment(function(){
+        insertProjects(5)
+    }), 10000);
+
+    setInterval(Meteor.bindEnvironment(function(){
+        removeAllProjects()
+    }), 600000);
+}
