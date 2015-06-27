@@ -9,14 +9,24 @@ queue.on( 'error', function( err ) {
 
 kue.app.listen(3003);
 
+createSafe = function(callback){
+    return Meteor.bindEnvironment(function(job, ctx, done){
+        // process.once( 'uncaughtException', function(err){
+        //     console.error( 'Something bad happened: ', err );
+        // });
+        
+        // throw new Error('testing this shit out');
+        return callback.call(this, job, ctx, done);
+    });
+}
+
 
 // Add and test a job
 //var job1 = queue.create('addScraper', data).ttl(1000).save();
 
 // Job processing functions are written in the format job, cb
-var addEmailProcessor = Meteor.bindEnvironment(function(job, ctx, done) {
+var addEmailProcessor = createSafe(function(job, ctx, done) {
     log.info("addEmailProcessor:", "Processing email tasks", job.data);
-    debugger;
     // var tos = _.map(job.data.to, function(email){
     //     if(typeof email == 'string')
     //         return {'email': email};
@@ -81,8 +91,9 @@ var addEmailProcessor = Meteor.bindEnvironment(function(job, ctx, done) {
     done();
 });
 
-var addScraperProcessor = Meteor.bindEnvironment(function(job, ctx, done) {
-    debugger;
+var addScraperProcessor = createSafe(function(job, ctx, done) {
+    //throw new Error('error from scraper');
+    //debugger;
     // Give the poor little project his helpers back
     console.log('scraping orders');
     log.info("Scraping orders");
@@ -93,22 +104,25 @@ var addScraperProcessor = Meteor.bindEnvironment(function(job, ctx, done) {
     // if project does not exist, delete the job
     if(!project){
     	job.remove();
-    	done();
+            var error = new Error('project '+ job.data.title +' not found')
+    	done(error);
+            throw error;
     }
     // otherwise create a new job to scrape the same project again 4 hours later
     else{
-
+        log.info("creating new job");
+        queue.create('addScraper', project).ttl(20000).delay(20000).save()
     }
 
     var emailLawyers = Meteor.bindEnvironment(function(links) {
         //var lawyers = project.lawyers(); Notify the lawyers
-
+        project = Projects.findOne(project._id);
+            
         // if new links, notify lawyers or whatever group there is that new orders have been fetched
-        if(checkNewLinks(project, links)){
+        if(project && checkNewLinks(project, links)){
             console.log()
             log.info("Inserting orders")
             project.insertOrders(links);
-            project = Projects.findOne(project._id);
             project.orders = project.orders();
             project.unreadCount = project.unreadCount();
             // project.path = sprintf('projects/%s', project._id);
@@ -148,3 +162,5 @@ queue.process('addEmail', addEmailProcessor);
 
 // Processfor for scraper task
 queue.process('addScraper', addScraperProcessor);
+
+queue.watchStuckJobs();

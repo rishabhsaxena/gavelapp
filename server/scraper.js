@@ -17,20 +17,9 @@ addScraperJob = function(project) {
 	// });
 	//job.retry({retries: 4, wait: 4*60*60*1000});
 	var data = project;
-	queue.create('addScraper', data).priority('high').save();
+	queue.create('addScraper', data).ttl(20000).save();
 	log.info("addScraperJob:", "added scraper job");
 	//job.save();
-}
-
-removeScraperJob = function(project) {
-	log.info("removeScraperJob:", "removing jobs from scraper");
-	var prevJobEntries = myJobs.find({'data.project._id': project._id, 'type':'addScraper'}).fetch();
-	prevJobEntries.forEach(function(entry){
-		var prevJob = new Job(myJobs, entry);
-		prevJob.pause();
-		prevJob.cancel();
-		prevJob.remove();
-	});
 }
 
 checkNewLinks = function(project, links) {
@@ -110,6 +99,12 @@ scrapeDelhiHighCourt = function(project, cb) {
 		    }
 
 	log.info("project:", project.ctype, project.cno, project.cyear);
+
+	// Always have an error event in scraper
+	nm.on('error', function(msg, trace){
+		console.log(msg, trace);
+		cb.call(this, []);
+	})
 
 	nm.goto('http://delhihighcourt.nic.in/case.asp')
 			.select('select[name="ctype"]', project.ctype)

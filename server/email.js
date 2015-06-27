@@ -28,7 +28,7 @@ addEmailReminder = function(doc, template, message, to, replyTo, subject, date) 
 	var data = {'name': 'Send Email', 'template': template, 'merge_vars': merge_vars, 'to': to, 'replyTo': replyTo, 'subject': subject}
 	var delayMilliSeconds = Math.max(0, date - new Date());
 	log.info(delayMilliSeconds);
-	queue.create('addEmail', data).priority('low').delay(delayMilliSeconds).save();
+	queue.create('addEmail', data).ttl(20000).delay(delayMilliSeconds).save();
 }
 
 toMandrillArray = function(obj) {
