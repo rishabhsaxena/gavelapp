@@ -1,13 +1,18 @@
-var kue = Meteor.npmRequire('kue')
-kue.app.listen(3003);
+kue = Meteor.npmRequire('kue')
+//kueServer = kue.app.listen(3003);
 
-queue = {}
+queue = kue.createQueue();
 
-stopKue = function() {
+stopKue = function(cb) {
     log.info('stopping kue')
     queue.shutdown(function(err) {
         console.log('Kue graceful shut down.', err || '');
+        //kueServer.close();
+        //delete kueServer;
+        if(cb)
+            cb.call(this);
     });
+    delete queue;
 }
 
 startKue = function(){
@@ -30,7 +35,7 @@ startKue = function(){
 
 restartKue = function(){
     if(queue !== {})
-        stopKue();
+        stopKue(startKue);
     startKue();
 }
 
