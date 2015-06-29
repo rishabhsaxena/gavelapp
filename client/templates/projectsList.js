@@ -18,3 +18,11 @@ Template.collapseList.helpers({
 Template.collapseList.rendered = function() {
 	$('.collapsible').collapsible();
 }
+
+Template.collapseList.events({
+    'click .delete': function (event) {
+    	if(confirm("Confirm Delete?"))
+        	Projects.remove(this._id);
+			Materialize.toast('Project Deleted!', 4000);
+    }
+});

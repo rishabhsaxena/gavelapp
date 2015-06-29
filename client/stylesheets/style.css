@@ -121,7 +121,7 @@ a {
 /*projectList*/
 .ctitle, .cnumber{
   word-wrap: break-word;
-  line-height: 1.5rem;
+  line-height: 1.3rem;
 }
 .btn-small{
   font-weight: bold;
@@ -147,6 +147,10 @@ a {
 .collapsible-header i {
   margin-right: 0px;
   margin-left: 0px;
+}
+.mdi-action-delete:hover,
+.mdi-action-delete:active {
+	color: #ff0000;
 }
 
 /*addButton*/
