@@ -21,8 +21,9 @@ Template.collapseList.rendered = function() {
 
 Template.collapseList.events({
     'click .delete': function (event) {
-    	if(confirm("Confirm Delete?"))
-        	Projects.remove(this._id);
+    	if(confirm("Confirm Delete?")) {
+			Projects.remove(this._id);
 			Materialize.toast('Project Deleted!', 4000);
+		}
     }
 });
