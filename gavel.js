@@ -14,11 +14,18 @@ if (Meteor.isClient) {
         'submit form': function (event) {
             debugger;
             event.preventDefault();
+            // Projects.insert({
+            //     'title': event.target.children[0].children[0].children[0].value,
+            //     'ctype': event.target.children[0].children[1].children[0].children[3].value,
+            //     'cno': event.target.children[0].children[2].children[0].value,
+            //     'cyear': event.target.children[0].children[3].children[0].children[3].value,
+            //     'userId': Meteor.userId()
+            // });
             Projects.insert({
-                'title': event.target.children[0].children[0].children[0].value,
-                'ctype': event.target.children[0].children[1].children[0].children[3].value,
-                'cno': event.target.children[0].children[2].children[0].value,
-                'cyear': event.target.children[0].children[3].children[0].children[3].value,
+                'title': $(event.target).find('[name=case_title]').val(),
+                'ctype': $(event.target).find('[name=case_type]').val(),
+                'cno': $(event.target).find('[name=case_number]').val(),
+                'cyear': $(event.target).find('[name=case_year]').val(),
                 'userId': Meteor.userId()
             });
             Router.go('projects');

@@ -119,7 +119,7 @@ a {
 }
 
 /*projectList*/
-.ctitle{
+.ctitle, .cnumber{
   word-wrap: break-word;
   line-height: 1.3rem;
 }
