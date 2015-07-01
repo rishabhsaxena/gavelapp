@@ -119,7 +119,7 @@ a {
 }
 
 /*projectList*/
-.ctitle, .cnumber{
+.ctitle{
   word-wrap: break-word;
   line-height: 1.3rem;
 }
@@ -151,6 +151,10 @@ a {
 .mdi-action-delete:hover,
 .mdi-action-delete:active {
 	color: #ff0000;
+}
+.mdi-action-description:hover,
+.mdi-action-description:active {
+	color: #2962ff;
 }
 
 /*addButton*/

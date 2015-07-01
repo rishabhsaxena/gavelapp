@@ -25,5 +25,9 @@ Template.collapseList.events({
 			Projects.remove(this._id);
 			Materialize.toast('Project Deleted!', 4000);
 		}
-    }
+	},
+	'click .edit': function(event) {
+		event.stopPropagation();
+		console.log(this._id);
+	}
 });
