@@ -27,7 +27,7 @@ Template.collapseList.events({
 		}
 	},
 	'click .edit': function(event) {
-		event.stopPropagation();
+		Router.go('editProject');
 		console.log(this._id);
 	}
 });
