@@ -27,7 +27,8 @@ Template.collapseList.events({
 		}
 	},
 	'click .edit': function(event) {
-		Router.go('editProject');
+		event.preventDefault();
+		Router.go('editProject'); alert("edit project route running");
 		console.log(this._id);
 	}
 });
