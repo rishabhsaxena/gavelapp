@@ -1,4 +1,6 @@
 Template.editProject.rendered = function() {
+   // debugger;
+   console.log('test');
    $('select').material_select();
 };
 
