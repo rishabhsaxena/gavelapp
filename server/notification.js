@@ -7,6 +7,9 @@ pushNotify =function(project){
 
 	};
 
+	//if(!body.query.user)
+	log.info('Push', body);
+
 	Push.send(body);
 
 };

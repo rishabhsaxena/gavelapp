@@ -57,3 +57,6 @@ log.add( Winston_Papertrail, {
 	    return level + ': ' + message;
 	}
 });
+
+// Raix push enable debug
+Push.debug = true

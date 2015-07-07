@@ -7,7 +7,9 @@ if (Meteor.isClient) {
     };
 
     Template.addProject.rendered = function () {
-        $('select').material_select();
+        $(function(){
+            $('select').material_select();    
+        });
     };
 
     Template.addProject.events({

@@ -53,12 +53,22 @@ scrapeDelhiHighCourt = function(project, cb) {
 		console.log("inside getPdfs", data.orders);
 
 		var getIframePdf = function() {
-		    return document.querySelector('iframe').src;
+		    var iframe = document.querySelector('iframe')
+		    
+		    if(iframe)
+		        return iframe.src;
+		    
+		    var table = document.querySelector('table');
+		    
+		    // Check if table element exists. That means its an older orders like EXP 276 2012
+		    if(table)
+		        return window.location.href;
 		}
 
 		var saveIframePdfs = function(pdf) {
 			log.info("got pdf", pdf);
-			data.pdfs.push({link: pdf});
+			if(pdf)
+				data.pdfs.push({link: pdf});
 		}
 
 		var handleResult = function(){

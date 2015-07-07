@@ -1,5 +1,5 @@
 kue = Meteor.npmRequire('kue')
-//kueServer = kue.app.listen(3003);
+kueServer = kue.app.listen(3003);
 
 queue = kue.createQueue();
 

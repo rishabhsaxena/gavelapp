@@ -1,5 +1,10 @@
 Template.editProject.rendered = function() {
-   $('select').material_select();
+   $(document).ready(function(){
+      //setTimeout(function(){
+         $('select').material_select();
+      //}, 500)
+         
+   });
 };
 
 Template.editProject.events({
