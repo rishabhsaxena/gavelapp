@@ -61,6 +61,7 @@ scrapeDelhiHighCourt = function(project, cb) {
 		    var table = document.querySelector('table');
 		    
 		    // Check if table element exists. That means its an older orders like EXP 276 2012
+		    console.log('found', window.location.href);
 		    if(table)
 		        return window.location.href;
 		}
@@ -84,7 +85,7 @@ scrapeDelhiHighCourt = function(project, cb) {
 		
 		/* Queue up all the commands */
 		_.each(data.orders, function(order) {
-			log.info("going to link", order);
+			log.info("going to link", order.link);
 			nn.goto(order.link)
 			//nn.screenshot('poko.png')
 			nn.wait()
@@ -102,8 +103,7 @@ scrapeDelhiHighCourt = function(project, cb) {
 		        var links = [];
 		        for(var i=0; i<els.length; i++){
 		            var oclick = els[i].getAttribute('onclick');
-		            var id = oclick.match(/\d+/g)[0];
-		            links.push({"link": "http://delhihighcourt.nic.in/dhcqrydisp_o.asp?pn=" + id + "&yr=" + cyear});
+		            links.push({"link": oclick.replace(/(location.href=')(.+)(')/, '$2')});
 		        }
 		        return links;
 		    }

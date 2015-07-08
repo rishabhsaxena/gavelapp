@@ -34,7 +34,7 @@ Template.viewOrderLink.events({
             }
         }
         else {
-            window.open(url);
+            window.open(url, '_system');
         }
     }
 });
