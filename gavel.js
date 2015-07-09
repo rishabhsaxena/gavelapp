@@ -8,13 +8,13 @@ if (Meteor.isClient) {
 
     Template.addProject.rendered = function () {
         $(function(){
-            $('select').material_select();    
+            $('select').material_select();
         });
     };
 
     Template.addProject.events({
         'submit form': function (event) {
-            debugger;
+            //debugger;
             event.preventDefault();
             Projects.insert({
                 'title': $(event.target).find('[name=case_title]').val(),
@@ -35,7 +35,7 @@ if (Meteor.isClient) {
 
     Template.projectsList.events({
         'click .projectRow': function (event, template) {
-            debugger;
+            //debugger;
             Router.go('detailsProject', {_id: this._id});
         }
     });

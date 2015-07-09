@@ -26,8 +26,7 @@ Template.collapseList.events({
 			Materialize.toast('Project Deleted!', 4000);
 		}
 	},
-	'click .edit': function(event) {
-		event.stopPropagation();
-		console.log(this._id);
+	'click .collapse': function(event) {
+   	event.stopPropagation();
 	}
 });
