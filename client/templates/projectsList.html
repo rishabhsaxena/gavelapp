@@ -1,4 +1,7 @@
 <template name="projectsList">
+{{#unless projects.count}}
+	{{> loading}}
+{{/unless}}
 <div class="collapse">
 			<ul class="collapsible" data-collapsible="expandable">
 				{{#each projects}}
