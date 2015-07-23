@@ -35,6 +35,38 @@ checkNewLinks = function(project, links) {
 	return !(_.isEqual(projectLinksArray.sort(), linkArray.sort()));
 }
 
+scrapeCauseList = function(cb) {
+	log.info("scrapeCauseList", "running scraper", "callback:");
+	var nm = new Nightmare(),
+		causeListLink = null;
+	nm.on('error', function(msg, trace){
+		console.log(msg, trace);
+		if(cb)
+			cb.call(this, null);
+	})
+	var parseLink = function(){
+		var causeListPdfIcon = document.querySelector("#pstory_bigdata a");
+		var domain = window.location.origin;
+		var relativeLink = causeListPdfIcon.getAttribute('href');
+		var absoluteLink = [domain, relativeLink].join('/');
+		return absoluteLink;
+	}
+	var saveResult = function(result){
+		log.info("got cause list link", result);
+		causeListLink = result;
+	}
+	var handleRequest = function(){
+		log.info("finally done");
+		if(cb && causeListLink){
+			log.info("assigning cause list link", "callback is");
+			cb.call(this, causeListLink);
+		}
+	}
+	nm.goto('http://delhihighcourt.nic.in/causelist_NIC_PDF.asp')
+		    .evaluate(parseLink, saveResult)
+		    .run(handleRequest);
+}
+
 scrapeDelhiHighCourt = function(project, cb) {
 	log.info("scrapeDelhiHighCourt:", "running scraper", "callback:");
 	var nm = new Nightmare();

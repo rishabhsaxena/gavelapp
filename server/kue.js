@@ -3,6 +3,8 @@ kueServer = kue.app.listen(3003);
 
 queue = kue.createQueue();
 
+var causeListLink = null;
+
 stopKue = function(cb) {
     log.info('stopping kue')
     queue.shutdown(function(err) {
@@ -29,6 +31,9 @@ startKue = function(){
 
     // Processfor for scraper task
     queue.process('addScraper', addScraperProcessor);
+
+    //Processor for cause list scrapper
+    queue.process('addCauseListScrapper', addCauseListScrapperProcessor);
 
     queue.watchStuckJobs();
 }
@@ -174,3 +179,28 @@ setInterval(restartKue, 5*60*1000);
             done(new Error(error));
         }
     });
+
+var addCauseListScrapperProcessor = Meteor.bindEnvironment(function(job, ctx, done) {
+    console.log("Scraping cause list");
+    log.info("Scraping cause list");
+    log.info("creating new job");
+    queue.create('addCauseListScrapper').ttl(20000).delay(6*60*60*1000).save()
+
+    var notifyLawyers = Meteor.bindEnvironment(function(link) {
+        //if new cause list link -> notify
+        if(causeListLink !== link){
+            console.log("before: ", causeListLink);
+            log.info("Changing cause list link");
+            causeListLink = link;
+            //notify
+            console.log("before: ", causeListLink);
+        }
+
+        log.info("Done scraping cause list");
+        job.log("Scraped cause list");
+
+        done();
+    });
+
+    scrapeCauseList(notifyLawyers);
+});
