@@ -32,10 +32,21 @@ startKue = function(){
     // Processfor for scraper task
     queue.process('addScraper', addScraperProcessor);
 
-    //Processor for cause list scrapper
+    //Processor for cause list scraper
     queue.process('addCauseListScrapper', addCauseListScrapperProcessor);
 
     queue.watchStuckJobs();
+
+    // Run global jobs which run indepentently of database hooks
+    startGlobalJobs();
+}
+
+startGlobalJobs = function() {
+    kue.Job.rangeByType( 'addCauseListScrapper', 'delayed', 0, 10, 'asc', function( err, jobs ) {
+        // you have an array of maximum n Job objects here
+        if(!jobs.length)
+            queue.create('addCauseListScrapper').removeOnComplete( true ).ttl(20000).save()
+    });
 }
 
 restartKue = function(){
@@ -134,7 +145,7 @@ setInterval(restartKue, 5*60*1000);
         // otherwise create a new job to scrape the same project again 4 hours later
         else{
             log.info("creating new job");
-            queue.create('addScraper', project).ttl(20000).delay(4*60*60*1000).save()
+            queue.create('addScraper', project).ttl(20000).delay(4*60*60*1000).removeOnComplete( true ).save()
         }
 
         var emailLawyers = Meteor.bindEnvironment(function(links) {
@@ -184,14 +195,18 @@ var addCauseListScrapperProcessor = Meteor.bindEnvironment(function(job, ctx, do
     console.log("Scraping cause list");
     log.info("Scraping cause list");
     log.info("creating new job");
-    queue.create('addCauseListScrapper').ttl(20000).delay(6*60*60*1000).save()
+    queue.create('addCauseListScrapper').ttl(20000).delay(/*6*60*6*/60*1000).removeOnComplete( true ).save()
 
     var notifyLawyers = Meteor.bindEnvironment(function(link) {
         //if new cause list link -> notify
         if(causeListLink !== link){
             console.log("before: ", causeListLink);
             log.info("Changing cause list link");
-            causeListLink = link;
+            
+            upsertCauseList({
+                'link': link,
+                'date': new Date()
+            })
             //notify
             console.log("before: ", causeListLink);
         }

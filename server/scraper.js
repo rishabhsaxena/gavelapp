@@ -17,7 +17,7 @@ addScraperJob = function(project) {
 	// });
 	//job.retry({retries: 4, wait: 4*60*60*1000});
 	var data = project;
-	queue.create('addScraper', data).ttl(20000).save();
+	queue.create('addScraper', data).ttl(20000).removeOnComplete( true ).save();
 	log.info("addScraperJob:", "added scraper job");
 	//job.save();
 }
