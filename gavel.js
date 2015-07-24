@@ -63,6 +63,10 @@ if (Meteor.isClient) {
         },
         'click .tour': function () {
             Router.go('tour');
+        },
+        'click .causelist': function () {
+            debugger;
+            console.log(CauseLists.find().length);
         }
     });
 }
