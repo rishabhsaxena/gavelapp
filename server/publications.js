@@ -6,3 +6,7 @@
   Meteor.publish("orders",function() {
   	return Orders.find({'userId' : this.userId});
   });
+
+  Meteor.publish("causelists",function() {
+  	return CauseLists.find({});
+  });

@@ -65,6 +65,7 @@ if (Meteor.isClient) {
             Router.go('tour');
         },
         'click .causelist': function () {
+            debugger;
             console.log(CauseLists.find().length);
         }
     });
