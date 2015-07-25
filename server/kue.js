@@ -195,7 +195,7 @@ var addCauseListScrapperProcessor = Meteor.bindEnvironment(function(job, ctx, do
     console.log("Scraping cause list");
     log.info("Scraping cause list");
     log.info("creating new job");
-    queue.create('addCauseListScrapper').ttl(20000).delay(/*6*60*6*/60*1000).removeOnComplete( true ).save()
+    queue.create('addCauseListScrapper').ttl(20000).delay(6*60*60*1000).removeOnComplete( true ).save()
 
     var notifyLawyers = Meteor.bindEnvironment(function(link) {
         //if new cause list link -> notify
