@@ -1,11 +1,4 @@
 if (Meteor.isClient) {
-    Template.nav.rendered = function () {
-        // Initialize collapse button
-        $(".button-collapse").sideNav();
-        // Initialize collapsible (uncomment the line below if you use the dropdown variation)
-        //$('.collapsible').collapsible();
-    };
-
     Template.addProject.rendered = function () {
         $(function(){
             $('select').material_select();
@@ -43,26 +36,6 @@ if (Meteor.isClient) {
     Template.addButton.events({
         'click .btn-floating': function () {
             Router.go('addProject');
-        }
-    });
-
-    Template.nav.rendered = function () {
-        $('.dropdown-button').dropdown({
-            inDuration: 300,
-            outDuration: 225,
-            constrain_width: false, // Does not change width of dropdown to that of the activator
-            hover: false, // Activate on hover
-            gutter: 0, // Spacing from edge
-        });
-
-    };
-
-    Template.nav.events({
-        'click .logout': function () {
-            Meteor.logout();
-        },
-        'click .tour': function () {
-            Router.go('tour');
         }
     });
 }
