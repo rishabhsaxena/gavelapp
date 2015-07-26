@@ -33,7 +33,7 @@ startKue = function(){
     queue.process('addScraper', addScraperProcessor);
 
     //Processor for cause list scraper
-    queue.process('addCauseListScrapper', addCauseListScrapperProcessor);
+    queue.process('addCauseListScraper', addCauseListScraperProcessor);
 
     queue.watchStuckJobs();
 
@@ -41,12 +41,59 @@ startKue = function(){
     startGlobalJobs();
 }
 
-startGlobalJobs = function() {
-    kue.Job.rangeByType( 'addCauseListScrapper', 'delayed', 0, 10, 'asc', function( err, jobs ) {
+addProjectScraper = function(project, delay) {
+    log.info('adding job for project: ', project.title, project._id);
+    // at any state there must be at most one active and one inactive/delayed
+    // if any other active/delayed job found, remove it and add a new job
+    
+    // Remove any other inactive jobs with same project id
+    kue.Job.rangeByType( 'addScraper', 'inactive', 0, 10, 'asc', function( err, jobs ) {
+        if(err)
+            log.error(err);
+
         // you have an array of maximum n Job objects here
-        if(!jobs.length)
-            queue.create('addCauseListScrapper').removeOnComplete( true ).ttl(20000).save()
+        var previousJobs = _.filter(jobs, function(job){ return job.data._id === project._id });
+
+        _.each(previousJobs, function(job){
+            job.remove(function(){
+                log.info('removed job: ', job.id)
+            });
+        });
     });
+
+    // If no other delayed jobs found, add a delayed job
+    kue.Job.rangeByType( 'addScraper', 'delayed', 0, 10, 'asc', function( err, jobs ) {
+        if(err)
+            log.error(err);
+
+        if(!jobs.length){
+            var job = queue.create('addScraper', project).removeOnComplete( true ).ttl(20000)
+            if(delay)
+                job.delay(delay)
+            job.save()
+        }
+    });
+}
+
+addCauseListScraper = function(delay) {
+    log.info('adding cause list scraper', delay)
+    // at any state there must be at most one active and one inactive/delayed
+    // if any other active/delayed job found, remove it and add a new job
+    kue.Job.rangeByType( 'addCauseListScraper', 'delayed', 0, 10, 'asc', function( err, jobs ) {
+        if(err)
+            log.error(err);
+        // you have an array of maximum n Job objects here
+        if(!jobs.length){
+            var job = queue.create('addCauseListScraper').removeOnComplete( true ).ttl(20000)
+            if(delay)
+                job.delay(delay)
+            job.save()
+        }
+    });
+}
+
+startGlobalJobs = function() {
+    addCauseListScraper();
 }
 
 restartKue = function(){
@@ -145,7 +192,7 @@ setInterval(restartKue, 5*60*1000);
         // otherwise create a new job to scrape the same project again 4 hours later
         else{
             log.info("creating new job");
-            queue.create('addScraper', project).ttl(20000).delay(4*60*60*1000).removeOnComplete( true ).save()
+            addProjectScraper(project, 4*60*60*1000);
         }
 
         var emailLawyers = Meteor.bindEnvironment(function(links) {
@@ -191,11 +238,11 @@ setInterval(restartKue, 5*60*1000);
         }
     });
 
-var addCauseListScrapperProcessor = Meteor.bindEnvironment(function(job, ctx, done) {
+var addCauseListScraperProcessor = Meteor.bindEnvironment(function(job, ctx, done) {
     console.log("Scraping cause list");
     log.info("Scraping cause list");
     log.info("creating new job");
-    queue.create('addCauseListScrapper').ttl(20000).delay(4*60*60*1000).removeOnComplete( true ).save()
+    addCauseListScraper(4*60*60*1000);
 
     var notifyLawyers = Meteor.bindEnvironment(function(link) {
         //if new cause list link -> notify

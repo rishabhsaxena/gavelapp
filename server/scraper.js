@@ -1,27 +1,5 @@
 Nightmare = Meteor.npmRequire('nightmare')
 
-addScraperJob = function(project) {
-	// Logic to find relevant scrape function based on court and scrape results automatically
-	// TODO: Faulty logic. Remove template from here and move this into helpers
-	// remove the old scraper job here
-	//removeScraperJob(project);
-
-	// Create a new scraper job
-	// var job = myJobs.createJob('addScraper', {'project': project});
-	// job.repeat({
-	//   repeats: Job.forever,   // Rerun this job 5 times,
-	//   wait: 4*60*60*1000   // wait 50 seconds between each re-run.
-	// });
-	// job.repeat({
-	//   schedule: myJobs.later.parse.text('every 5 hours')   // Rerun this job every 5 minutes
-	// });
-	//job.retry({retries: 4, wait: 4*60*60*1000});
-	var data = project;
-	queue.create('addScraper', data).ttl(20000).removeOnComplete( true ).save();
-	log.info("addScraperJob:", "added scraper job");
-	//job.save();
-}
-
 checkNewLinks = function(project, links) {
 	log.info("checkNewLinks:", "checking new links");
 	// Take order and return link
