@@ -69,7 +69,9 @@ addProjectScraper = function(project, delay) {
         if(err)
             log.error(err);
 
-        if(!jobs.length){
+        var previousJobs = _.filter(jobs, function(job){ return job.data._id === project._id });
+
+        if(!previousJobs.length){
             var job = queue.create('addScraper', project).removeOnComplete( true ).ttl(20000)
             if(delay)
                 job.delay(delay)
