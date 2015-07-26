@@ -35,6 +35,9 @@ startKue = function(){
     //Processor for cause list scraper
     queue.process('addCauseListScrapper', addCauseListScrapperProcessor);
 
+    //Processor for cause list scraper
+    queue.process('addDisplayBoardScrapper', addDisplayBoardScrapperProcessor);
+
     queue.watchStuckJobs();
 
     // Run global jobs which run indepentently of database hooks
@@ -46,6 +49,11 @@ startGlobalJobs = function() {
         // you have an array of maximum n Job objects here
         if(!jobs.length)
             queue.create('addCauseListScrapper').removeOnComplete( true ).ttl(20000).save()
+    });
+    kue.Job.rangeByType( 'addDisplayBoardScrapper', 'delayed', 0, 10, 'asc', function( err, jobs ) {
+        // you have an array of maximum n Job objects here
+        if(!jobs.length)
+            queue.create('addDisplayBoardScrapper').removeOnComplete( true ).ttl(20000).save()
     });
 }
 
@@ -219,3 +227,30 @@ var addCauseListScrapperProcessor = Meteor.bindEnvironment(function(job, ctx, do
 
     scrapeCauseList(notifyLawyers);
 });
+
+var addDisplayBoardScrapperProcessor = Meteor.bindEnvironment(function(job, ctx, done) {
+    console.log("Scrapping display board");
+    log.info("Srcapping display board");
+    log.info("creating new job");
+    queue.create('addDisplayBoardScrapper').ttl(20000).delay(10*60*1000).removeOnComplete(true).save();
+
+    var notifyLawyers = Meteor.bindEnvironment(function(courtItems) {
+        //if new things on display board -> notify
+        var diffs = getDisplayBoardDiffs(courtItems);
+        if(diffs['delete'].length){
+            deleteDisplayBoardItems(diffs['delete']);
+        }
+        if(diffs['insert'].length){
+            insertDisplayBoardItems(diffs['insert']);
+        }
+        if(diffs['update'].length){
+            updateDisplayBoardItems(diffs['update']);
+        }
+        log.info("Done scraping display board");
+        job.log("Scraped display board");
+
+        done();
+    })
+
+    scrapeDisplayBoard(notifyLawyers);
+})
