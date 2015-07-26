@@ -13,6 +13,84 @@ checkNewLinks = function(project, links) {
 	return !(_.isEqual(projectLinksArray.sort(), linkArray.sort()));
 }
 
+getDisplayBoardDiffs = function(courtItems){
+	log.info("checkDisplayBoardUpdates:", "checking display board updates");
+	var oldDisplayBoard = DisplayBoard.find({}).fetch();
+
+	var compare = function(a, b){
+		if(a.courtNo < b.courtNo)
+			return 1;
+		else(a.courtNo > b.courtNo)
+			return -1;
+		return 0;
+	}
+
+	oldDisplayBoard.sort(compare);
+	courtItems.sort(compare);
+
+	var diffs = {
+		'insert': [],
+		'delete': [],
+		'update': []
+	};
+
+	if(courtItems.length){
+		while(oldDisplayBoard.length && courtItems.length){
+			var old = oldDisplayBoard.pop(), newValue = courtItems.pop();
+			if(old.courtNo < newValue.courtNo){
+				diffs['delete'].push(old.courtNo);
+				courtItems.push(newValue);
+			}
+			else if(old.courtNo > newValue.courtNo){
+				diffs['insert'].push(newValue);
+				oldDisplayBoard.push(old)
+			}
+			else if(old.item != newValue.item)
+				diffs['update'].push(newValue);
+		}
+		diffs['delete'] = diffs['delete'].concat(_.map(oldDisplayBoard, function(obj){return obj.courtNo;}));
+		diffs['insert'] = diffs['insert'].concat(courtItems);
+	}
+
+	return diffs;
+}
+
+scrapeDisplayBoard = function(cb){
+	log.info("scrapeDisplayBoard", "running scraper", "callback:");
+	var nm = new Nightmare(),
+		data = [];
+	nm.on('error', function(msg, trace){
+		console.log(msg, trace);
+		if(cb)
+			cb.call(this, null);
+	})
+	var parseLink = function(){
+		var tableCells = document.querySelectorAll("td[id^='Td']");
+		var courts = [];
+		for(var i=0, length = tableCells.length;i<length;i+=2){
+			courts.push({
+				courtNo: parseInt($(tableCells[i]).text().trim()),
+				item: $(tableCells[i+1]).text().trim()
+			})
+		}
+		return courts;
+	}
+	var saveResult = function(result){
+		log.info("got display board items", result);
+		data = result;
+	}
+	var handleRequest = function(){
+		log.info("finally done");
+		if(cb && data){
+			log.info("assigning court items", "callback is");
+			cb.call(this, data);
+		}
+	}
+	nm.goto('http://delhihighcourt.nic.in/displayboard.asp')
+		    .evaluate(parseLink, saveResult)
+		    .run(handleRequest);
+}
+
 scrapeCauseList = function(cb) {
 	log.info("scrapeCauseList", "running scraper", "callback:");
 	var nm = new Nightmare(),

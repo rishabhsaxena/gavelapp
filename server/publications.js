@@ -10,3 +10,7 @@
   Meteor.publish("causelists",function() {
   	return CauseLists.find({});
   });
+
+  Meteor.publish("displayboard", function() {
+  	return DisplayBoard.find({});
+  })

@@ -35,6 +35,9 @@ startKue = function(){
     //Processor for cause list scraper
     queue.process('addCauseListScraper', addCauseListScraperProcessor);
 
+    //Processor for cause list scraper
+    queue.process('addDisplayBoardScraper', addDisplayBoardScraperProcessor);
+
     queue.watchStuckJobs();
 
     // Run global jobs which run indepentently of database hooks
@@ -92,8 +95,27 @@ addCauseListScraper = function(delay) {
     });
 }
 
+addDisplayBoardScraper = function(delay) {
+    log.info('adding display board scraper', delay)
+    // at any state there must be at most one active and one inactive/delayed
+    // if any other active/delayed job found, remove it and add a new job
+    kue.Job.rangeByType( 'addDisplayBoardScraper', 'delayed', 0, 10, 'asc', function( err, jobs ) {
+        if(err)
+            log.error(err);
+        // you have an array of maximum n Job objects here
+        if(!jobs.length){
+            var job = queue.create('addDisplayBoardScraper').ttl(20000).removeOnComplete(true)
+            if(delay)
+                job.delay(delay)
+            job.save()
+        }
+    });
+    
+}
+
 startGlobalJobs = function() {
     addCauseListScraper();
+    addDisplayBoardScraper();
 }
 
 restartKue = function(){
@@ -266,3 +288,30 @@ var addCauseListScraperProcessor = Meteor.bindEnvironment(function(job, ctx, don
 
     scrapeCauseList(notifyLawyers);
 });
+
+var addDisplayBoardScraperProcessor = Meteor.bindEnvironment(function(job, ctx, done) {
+    console.log("Scrapping display board");
+    log.info("Srcapping display board");
+    log.info("creating new job");
+    addDisplayBoardScraper(10*60*1000);
+
+    var notifyLawyers = Meteor.bindEnvironment(function(courtItems) {
+        //if new things on display board -> notify
+        var diffs = getDisplayBoardDiffs(courtItems);
+        if(diffs['delete'].length){
+            deleteDisplayBoardItems(diffs['delete']);
+        }
+        if(diffs['insert'].length){
+            insertDisplayBoardItems(diffs['insert']);
+        }
+        if(diffs['update'].length){
+            updateDisplayBoardItems(diffs['update']);
+        }
+        log.info("Done scraping display board");
+        job.log("Scraped display board");
+
+        done();
+    })
+
+    scrapeDisplayBoard(notifyLawyers);
+})

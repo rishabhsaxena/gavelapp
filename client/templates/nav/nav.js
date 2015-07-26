@@ -21,5 +21,8 @@ Template.nav.events({
             pdfCacheOrOpen(causelist.link);
         else
             Materialize.toast('Sorry no link is available at this moment!', 2000);
+    },
+    'click .displayboard': function () {
+        Router.go('displayBoard');
     }
 });

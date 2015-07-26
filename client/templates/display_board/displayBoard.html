@@ -1,0 +1,38 @@
+<template name="displayBoard">
+	<style>
+		.table-bordered,
+		.table-bordered th,
+	  	.table-bordered td {
+		    border: 1px solid #ddd !important;
+	  	}
+		.table-bordered > thead > tr > th,
+		.table-bordered > thead > tr > td {
+		  border-bottom-width: 2px;
+		}
+		#displayBoardRow{
+			padding-top: 20px;
+			padding-bottom: 20px;
+		}
+	</style>
+	{{> nav}}
+	<div class="container">
+		<div class="row" id="displayBoardRow">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Court No.</th>
+						<th>Item</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each courtItems}}
+						<tr>
+							<td>{{courtNo}}</td>
+							<td>{{item}}</td>
+						</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</template>
