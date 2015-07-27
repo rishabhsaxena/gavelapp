@@ -121,7 +121,7 @@ startGlobalJobs = function() {
 restartKue = function(){
     if(queue !== {})
         stopKue(startKue);
-    setTimeout(startKue, 2000);
+    startKue();
 }
 
 // Restart kue every 10 mins
