@@ -209,9 +209,9 @@ scrapeDelhiHighCourt = function(project, cb) {
 		    .type('input[name="cno"]', project.cno+'')
 		    .select('select[name="cyear"]', project.cyear+'')
 		    .click('input[name="submit"]')
-		    .wait()
+		    .wait(15000)
 		    .click('button[onclick*="case"]')
-		    .wait()
+		    .wait(15000)
 		    .evaluate(parseLinks, handleResult, project.ctype, project.cno, project.cyear)
 		    .run(fetchPdfs);
 }

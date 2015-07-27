@@ -38,8 +38,6 @@ startKue = function(){
     //Processor for cause list scraper
     queue.process('addDisplayBoardScraper', addDisplayBoardScraperProcessor);
 
-    queue.watchStuckJobs();
-
     // Run global jobs which run indepentently of database hooks
     startGlobalJobs();
 }
@@ -72,7 +70,7 @@ addProjectScraper = function(project, delay) {
         var previousJobs = _.filter(jobs, function(job){ return job.data._id === project._id });
 
         if(!previousJobs.length){
-            var job = queue.create('addScraper', project).removeOnComplete( true ).ttl(60000)
+            var job = queue.create('addScraper', project).removeOnComplete( true ).ttl(4*60*1000)
             if(delay)
                 job.delay(delay)
             job.save()
@@ -89,7 +87,7 @@ addCauseListScraper = function(delay) {
             log.error(err);
         // you have an array of maximum n Job objects here
         if(!jobs.length){
-            var job = queue.create('addCauseListScraper').removeOnComplete( true ).ttl(60000)
+            var job = queue.create('addCauseListScraper').removeOnComplete( true ).ttl(4*60*1000)
             if(delay)
                 job.delay(delay)
             job.save()
@@ -106,7 +104,7 @@ addDisplayBoardScraper = function(delay) {
             log.error(err);
         // you have an array of maximum n Job objects here
         if(!jobs.length){
-            var job = queue.create('addDisplayBoardScraper').ttl(60000).removeOnComplete(true)
+            var job = queue.create('addDisplayBoardScraper').ttl(4*60*1000).removeOnComplete(true)
             if(delay)
                 job.delay(delay)
             job.save()
@@ -123,7 +121,7 @@ startGlobalJobs = function() {
 restartKue = function(){
     if(queue !== {})
         stopKue(startKue);
-    startKue();
+    setTimeout(startKue, 2000);
 }
 
 // Restart kue every 10 mins
