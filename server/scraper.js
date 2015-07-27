@@ -45,11 +45,26 @@ scrapeCauseList = function(cb) {
 			cb.call(this, null);
 	})
 	var parseLink = function(){
-		var causeListPdfIcon = document.querySelector("#pstory_bigdata a");
-		var domain = window.location.origin;
-		var relativeLink = causeListPdfIcon.getAttribute('href');
-		var absoluteLink = [domain, relativeLink].join('/');
-		return absoluteLink;
+		var currentDate = new Date();
+		var pad = function(n){
+			return n<10?("0"+n):n;
+		}
+		var requiredFormat = [pad(currentDate.getDate()), pad(currentDate.getMonth()+1), currentDate.getFullYear()].join('.');
+		var causeListPdfIcon = function(){
+			var items = document.querySelectorAll('#pstory_bigdata tr');
+			for(var i=0, length=items.length;i<length;i++){
+				if((items[i].innerText || items[i].textContent).toLowerCase().trim() === "cause list for "+requiredFormat)
+					return items[i].querySelector('a');
+			}
+			return null;
+		}()
+		if(causeListPdfIcon){
+			var domain = window.location.origin;
+			var relativeLink = causeListPdfIcon.getAttribute('href');
+			var absoluteLink = [domain, relativeLink].join('/');
+			return absoluteLink;
+		}
+		return null;
 	}
 	var saveResult = function(result){
 		log.info("got cause list link", result);
