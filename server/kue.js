@@ -72,7 +72,7 @@ addProjectScraper = function(project, delay) {
         var previousJobs = _.filter(jobs, function(job){ return job.data._id === project._id });
 
         if(!previousJobs.length){
-            var job = queue.create('addScraper', project).removeOnComplete( true ).ttl(20000)
+            var job = queue.create('addScraper', project).removeOnComplete( true ).ttl(60000)
             if(delay)
                 job.delay(delay)
             job.save()
@@ -89,7 +89,7 @@ addCauseListScraper = function(delay) {
             log.error(err);
         // you have an array of maximum n Job objects here
         if(!jobs.length){
-            var job = queue.create('addCauseListScraper').removeOnComplete( true ).ttl(20000)
+            var job = queue.create('addCauseListScraper').removeOnComplete( true ).ttl(60000)
             if(delay)
                 job.delay(delay)
             job.save()
@@ -106,7 +106,7 @@ addDisplayBoardScraper = function(delay) {
             log.error(err);
         // you have an array of maximum n Job objects here
         if(!jobs.length){
-            var job = queue.create('addDisplayBoardScraper').ttl(20000).removeOnComplete(true)
+            var job = queue.create('addDisplayBoardScraper').ttl(60000).removeOnComplete(true)
             if(delay)
                 job.delay(delay)
             job.save()
